@@ -30,7 +30,7 @@ public:
      */
     void setObjectThreshold(int threshold);
 
-    void printReadings() const;
+    void printFullReadings() const;
 
 private:
     Zumo32U4ProximitySensors zumoProxSensors;
