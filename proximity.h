@@ -22,17 +22,7 @@ public:
      */
     bool objectVisible();
 
-    // /**
-    //  * \brief Controleert of een object zichtbaar is.
-    //  * \return true als een object gedetecteerd wordt, anders false.
-    //  */
-    // bool objectVisibleLeft();
-
-    // /**
-    //  * \brief Controleert of een object zichtbaar is.
-    //  * \return true als een object gedetecteerd wordt, anders false.
-    //  */
-    // bool objectVisibleRight();
+    int objectDirection();
 
     /**
      * \brief Stelt de drempelwaarde voor object detectie in.
@@ -40,7 +30,7 @@ public:
      */
     void setObjectThreshold(int threshold);
 
-    void printReadings() const;
+    void printFullReadings() const;
 
 private:
     Zumo32U4ProximitySensors zumoProxSensors;
