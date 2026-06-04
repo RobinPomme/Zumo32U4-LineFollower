@@ -6,7 +6,7 @@ ProximitySensor::ProximitySensor(Xbee* x):xbee(x) {
 }
 
 bool ProximitySensor::objectVisible() {
-    // zumoProxSensors.read();
+    zumoProxSensors.read();
     return (zumoProxSensors.countsFrontWithLeftLeds() >= objectThreshold) || (zumoProxSensors.countsFrontWithRightLeds() >= objectThreshold);
 }
 
@@ -17,7 +17,7 @@ bool ProximitySensor::objectVisible() {
     Default 0 */
 int ProximitySensor::objectDirection() {
     int direction = 0;
-    // zumoProxSensors.read();
+    zumoProxSensors.read();
 
     if (this->objectvisible()) {
         int leftLedReading = zumoProxSensors.countsFrontWithLeftLeds();
