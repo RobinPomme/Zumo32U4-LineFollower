@@ -22,18 +22,6 @@ public:
      */
     bool objectVisible();
 
-    // /**
-    //  * \brief Controleert of een object zichtbaar is.
-    //  * \return true als een object gedetecteerd wordt, anders false.
-    //  */
-    // bool objectVisibleLeft();
-
-    // /**
-    //  * \brief Controleert of een object zichtbaar is.
-    //  * \return true als een object gedetecteerd wordt, anders false.
-    //  */
-    // bool objectVisibleRight();
-
     /**
      * \brief Stelt de drempelwaarde voor object detectie in.
      * \param threshold De nieuwe drempelwaarde.
