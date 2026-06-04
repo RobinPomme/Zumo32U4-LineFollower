@@ -9,9 +9,10 @@ class Xbee {
     public:
         Xbee();
         char leesXbee(); //Functie definities
-        void printXbee(String meegegevenwaarde);
-        void printXbee(int meegegevenwaarde);
         void printLineBreak();
+        template <class T> void Xbee::printXbee(T m) {
+            Serial1.println(m);
+        }
 };
 
 #endif
