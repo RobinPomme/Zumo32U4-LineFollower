@@ -10,7 +10,32 @@ bool ProximitySensor::objectVisible() {
     return (zumoProxSensors.countsFrontWithLeftLeds() >= objectThreshold) || (zumoProxSensors.countsFrontWithRightLeds() >= objectThreshold);
 }
 
-void ProximitySensor::printReadings() const{
+/*  -1 = Beide 0
+    0 = Beide L & R gelijke waarde
+    1 = Links
+    2 = Rechts
+    Default 0 */
+int ProximitySensor::objectDirection() {
+    int direction = 0;
+    // zumoProxSensors.read();
+
+    if (this->objectvisible()) {
+        int leftLedReading = zumoProxSensors.countsFrontWithLeftLeds();
+        int rightLedReading = zumoProxSensors.countsFrontWithRightLeds();
+
+        if (leftLedReading == rightLedReading){
+            return 0;
+        } else if (leftLedReading > rightLedReading) {
+            return 1;
+        } else if (rightLedReading > leftLedReading) {
+            return 2;
+        }
+    } else {
+        return -1;
+    }
+}
+
+void ProximitySensor::printFullReadings() const{
     zumoProxSensors.read();
 
     xbee->printLineBreak();

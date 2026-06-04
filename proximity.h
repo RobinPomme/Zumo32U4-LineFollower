@@ -22,6 +22,8 @@ public:
      */
     bool objectVisible();
 
+    int objectDirection();
+
     /**
      * \brief Stelt de drempelwaarde voor object detectie in.
      * \param threshold De nieuwe drempelwaarde.
