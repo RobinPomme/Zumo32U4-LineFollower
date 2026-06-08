@@ -5,7 +5,7 @@
 #include <Wire.h>
 #include "xbee.h"
 
-#define NUMSENSORS 5 ///< vertelt hoeveel sensoren de ZUMO heeft
+#define NUMSENSORS 5  ///< vertelt hoeveel sensoren de ZUMO heeft
 //#define LIJNDREMPEL 500  ///< vertelt wat de drempel waarde is voor de zwarte lijn
 //#define MIDDENPOSITIE 2000 ///< vertelt wat de midden positie is
 
@@ -18,10 +18,10 @@ struct KalibratieData {
 /// @brief maakt de class aan
 class LijnSensor {
 
-  public:
-  LijnSensor(Xbee* x);
-  
-  KalibratieData kalibreer(String kleur); ///< kalibreert de sensoren
+public:
+  LijnSensor(Xbee*);
+
+  KalibratieData kalibreer(String kleur);  ///< kalibreert de sensoren
   void kalibreerAlles();
   void kalibreerLijn();
   void kalibreerWit();
@@ -29,21 +29,26 @@ class LijnSensor {
   void kalibreerGroen();
   void kalibreerGrijs();
   void kalibreerBruin();
-  int leesPositie(); ///< geeft de positie van de lij
-  bool zietLijn(); ///< geeft true als hij de lijn ziet
-  bool zietLinks(); ///< geeft true als hij de lijn links ziet
-  bool zietRechts(); ///< geeft true als hij de lijn rechts ziet
-  unsigned int* getSensorWaarden(); ///< geeft de waarde terug van de sensoren
+  int leesPositie();                 ///< geeft de positie van de lij
+  bool zietLijn();                   ///< geeft true als hij de lijn ziet
+  bool zietLinks();                  ///< geeft true als hij de lijn links ziet
+  bool zietRechts();                 ///< geeft true als hij de lijn rechts ziet
+  unsigned int* getSensorWaarden();  ///< geeft de waarde terug van de sensoren
+  bool getLijnKleur();
 
-  private:
-    Zumo32U4LineSensors sensoren; 
-    unsigned int waarden[NUMSENSORS]; ///< hier wordt de array van de sensor waarden in
-    KalibratieData drempelwaardenZwart;
-    KalibratieData drempelwaardenGroen;
-    KalibratieData drempelwaardenGrijs;
-    KalibratieData drempelwaardenBruin;
-    Xbee* xbeePointer;
-    Zumo32U4ButtonB knopB;
+private:
+  KalibratieData getGemiddeldeMeting(int);
+  bool zwartGedetecteerd();
+  bool groenGedetecteerd();
+  bool groeneLijn;
+  Zumo32U4LineSensors sensoren;
+  unsigned int waarden[NUMSENSORS];  ///< hier wordt de array van de sensor waarden in
+  KalibratieData drempelwaardenZwart;
+  KalibratieData drempelwaardenGroen;
+  KalibratieData drempelwaardenGrijs;
+  KalibratieData drempelwaardenBruin;
+  Xbee* xbeePointer;
+  Zumo32U4ButtonB knopB;
 };
 
 #endif

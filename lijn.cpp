@@ -4,29 +4,22 @@
 /**
  * @brief initialliseert de 5 sensoren van de ZUMO
  */
-LijnSensor::LijnSensor(Xbee* x):xbeePointer(x) {
+LijnSensor::LijnSensor(Xbee* x): xbeePointer(x), groeneLijn(false) {
   sensoren.initFiveSensors();
 }
-/**
- * @brief kalibreert de ZUMO zodat het de lijn kan zien
- */
-KalibratieData LijnSensor::kalibreer(String kleur){
+
+KalibratieData LijnSensor::getGemiddeldeMeting(int aantalMetingen) {
   KalibratieData resultaat;
-  xbeePointer->printLineBreak();
-  xbeePointer->printXbee("Kleur " + kleur + " wordt nu gekalibreert.");
-  knopB.waitForButton();
-  xbeePointer->printLineBreak();
   sensoren.readCalibrated(waarden);
   unsigned long totaal[NUMSENSORS];
   for (int i = 0; i<NUMSENSORS; i++) {
+    totaal[i] = waarden[i];
     resultaat.minimum[i] = waarden[i];
     resultaat.maximum[i] = waarden[i];
-    resultaat.gemiddelde[i] = waarden[i];
-    totaal[i] = waarden[i];
   }
-  for (int i = 0; i<100; i++) {
+  for (int i = 0; i < aantalMetingen; i++) {
     sensoren.readCalibrated(waarden);
-    for (int j = 0; j<NUMSENSORS; j++) {
+    for (int j = 0; j < NUMSENSORS; j++) {
       totaal[j] += waarden[j];
       if (waarden[j] < resultaat.minimum[j]) {
         resultaat.minimum[j] = waarden[j];
@@ -36,12 +29,25 @@ KalibratieData LijnSensor::kalibreer(String kleur){
       }
     }
   }
+  for (int i = 0; i < NUMSENSORS; i++) {
+    resultaat.gemiddelde[i] = totaal[i] / (aantalMetingen + 1);
+  }
+  return resultaat;
+}
+/**
+ * @brief kalibreert de ZUMO zodat het de lijn kan zien
+ */
+KalibratieData LijnSensor::kalibreer(String kleur) {
+  xbeePointer->printLineBreak();
+  xbeePointer->printXbee("Kleur " + kleur + " wordt nu gekalibreert.");
+  knopB.waitForButton();
+  xbeePointer->printLineBreak();
+  KalibratieData resultaat = getGemiddeldeMeting(100);
 
   String minString = "Minimum waarde ";
   String maxString = "Maximum waarde ";
   String gemString = "Gemiddelde waarde ";
-  for (int i = 0; i<NUMSENSORS; i++) {
-    resultaat.gemiddelde[i] = totaal[i] / 101;
+  for (int i = 0; i < NUMSENSORS; i++) {
     minString += resultaat.minimum[i];
     minString += " ";
     maxString += resultaat.maximum[i];
@@ -58,69 +64,135 @@ KalibratieData LijnSensor::kalibreer(String kleur){
 /**
  * @brief geeft de positie van de lijn
  */
-  int LijnSensor::leesPositie() {
-    int test = sensoren.readLine(waarden);
+int LijnSensor::leesPositie() {
+  /*int test = sensoren.readLine(waarden);
     xbeePointer->printXbee(test);
     return test;
+    */
+  if (zwartGedetecteerd()) {
+    KalibratieData gemiddeldeMeting = getGemiddeldeMeting(20);
+    long totaal = 0;
+    long gewogenGemiddelde = 0;
+    for (int i = 0; i < NUMSENSORS; i++) {
+      if (gemiddeldeMeting.gemiddelde[i] < drempelwaardenZwart.maximum[i] && gemiddeldeMeting.gemiddelde[i] > drempelwaardenZwart.minimum[i]) {
+        totaal += gemiddeldeMeting.gemiddelde[i];
+
+        gewogenGemiddelde += gemiddeldeMeting.gemiddelde[i] * (i * 1000);
+      }
+    }
+    if (totaal <= 0) {
+      return -1;
+    }
+    return gewogenGemiddelde / totaal;
+
+  } else if (groenGedetecteerd()) {
+    KalibratieData gemiddeldeMeting = getGemiddeldeMeting(20);
+
+    long totaal = 0;
+    long gewogenGemiddelde = 0;
+    for (int i = 0; i < NUMSENSORS; i++) {
+      if (gemiddeldeMeting.gemiddelde[i] < drempelwaardenGroen.maximum[i] && gemiddeldeMeting.gemiddelde[i] > drempelwaardenGroen.minimum[i]) {
+        totaal += gemiddeldeMeting.gemiddelde[i];
+
+        gewogenGemiddelde += gemiddeldeMeting.gemiddelde[i] * (i * 1000);
+      }
+    }
+    if (totaal <= 0) {
+      return -1;
+    }
+    return gewogenGemiddelde / totaal;
   }
+  return -1;
+}
 /**
  * @brief geeft true terug als die een lijn ziet
  */
-  bool LijnSensor::zietLijn(){
-    bool zwartGezien = false;
-    bool groenGezien = false;
+bool LijnSensor::zietLijn() {
+  bool zwartGezien = false;
+  bool groenGezien = false;
 
-    sensoren.readCalibrated(waarden);
-    xbeePointer->printLineBreak();
-    for (int i = 0; i< NUMSENSORS; i++) {
-      if (waarden[i] > drempelwaardenZwart.minimum[i] && waarden[i] < drempelwaardenZwart.maximum[i]) {
-        String test = String(i) + " ziet lijn en heeft waarde " + String(waarden[i]) + " en drempelwaarde is min " + String(drempelwaardenZwart.minimum[i]) + " max " + String(drempelwaardenZwart.maximum[i]);
-        xbeePointer->printXbee(test);
-        zwartGezien = true;
-        continue;
-      }
-      String test = String(i) + " ziet lijn NIET en heeft waarde " + String(waarden[i]) + " en drempelwaarde is min " + String(drempelwaardenZwart.minimum[i]) + " max " + String(drempelwaardenZwart.maximum[i]);
+  sensoren.readCalibrated(waarden);
+  xbeePointer->printLineBreak();
+  for (int i = 0; i < NUMSENSORS; i++) {
+    if (waarden[i] > drempelwaardenZwart.minimum[i] && waarden[i] < drempelwaardenZwart.maximum[i]) {
+      String test = String(i) + " ziet lijn en heeft waarde " + String(waarden[i]) + " en drempelwaarde is min " + String(drempelwaardenZwart.minimum[i]) + " max " + String(drempelwaardenZwart.maximum[i]);
       xbeePointer->printXbee(test);
+      zwartGezien = true;
+      continue;
     }
-    xbeePointer->printLineBreak();
-    return zwartGezien || groenGezien;
+    String test = String(i) + " ziet lijn NIET en heeft waarde " + String(waarden[i]) + " en drempelwaarde is min " + String(drempelwaardenZwart.minimum[i]) + " max " + String(drempelwaardenZwart.maximum[i]);
+    xbeePointer->printXbee(test);
   }
+  xbeePointer->printLineBreak();
+  return zwartGezien || groenGezien;
+}
 
-  void LijnSensor::kalibreerWit() {
-    kalibreer("wit");
-    sensoren.calibrate();
+void LijnSensor::kalibreerWit() {
+  kalibreer("wit");
+  //sensoren.calibrate();
+}
+
+void LijnSensor::kalibreerZwart() {
+  KalibratieData zwarteData = kalibreer("zwart");
+  for (int i = 0; i < NUMSENSORS; i++) {
+    drempelwaardenZwart.minimum[i] = zwarteData.minimum[i] * 0.8;
+    drempelwaardenZwart.maximum[i] = zwarteData.maximum[i] * 1.5;
+    drempelwaardenZwart.gemiddelde[i] = zwarteData.gemiddelde[i];
   }
+}
 
-  void LijnSensor::kalibreerZwart() {
-    KalibratieData zwarteData =  kalibreer("zwart");
-    for (int i = 0; i< NUMSENSORS; i++) {
-      drempelwaardenZwart.minimum[i] = zwarteData.minimum[i] / 2.15;
-      drempelwaardenZwart.maximum[i] = zwarteData.maximum[i];
-      drempelwaardenZwart.gemiddelde[i] = zwarteData.gemiddelde[i];
+void LijnSensor::kalibreerGroen() {
+  KalibratieData groeneData = kalibreer("groen");
+  for (int i = 0; i < NUMSENSORS; i++) {
+    drempelwaardenGroen.minimum[i] = groeneData.minimum[i];
+    drempelwaardenGroen.maximum[i] = groeneData.maximum[i];
+    drempelwaardenGroen.gemiddelde[i] = groeneData.gemiddelde[i];
+  }
+}
+
+void LijnSensor::kalibreerBruin() {
+  kalibreer("bruin");
+}
+
+void LijnSensor::kalibreerGrijs() {
+  kalibreer("grijs");
+}
+
+void LijnSensor::kalibreerAlles() {
+  kalibreerWit();
+  kalibreerZwart();
+  kalibreerGroen();
+  kalibreerGrijs();
+  kalibreerBruin();
+  xbeePointer->printLineBreak();
+}
+
+void LijnSensor::kalibreerLijn() {
+  sensoren.calibrate();
+}
+
+bool LijnSensor::groenGedetecteerd() {
+  KalibratieData meting = getGemiddeldeMeting(10);
+  for (int i = 0; i < NUMSENSORS; i++) {
+    if (meting.gemiddelde[i] < drempelwaardenGroen.maximum[i] && meting.gemiddelde[i] > drempelwaardenGroen.minimum[i]) {
+      groeneLijn = true;
+      return true;
     }
   }
+  return false;
+}
 
-  void LijnSensor::kalibreerGroen() {
-    kalibreer("groen");
+bool LijnSensor::zwartGedetecteerd() {
+  KalibratieData meting = getGemiddeldeMeting(10);
+  for (int i = 0; i < NUMSENSORS; i++) {
+    if (meting.gemiddelde[i] < drempelwaardenZwart.maximum[i] && meting.gemiddelde[i] > drempelwaardenZwart.minimum[i]) {
+      groeneLijn = false;
+      return true;
+    }
   }
+  return false;
+}
 
-  void LijnSensor::kalibreerBruin() {
-    kalibreer("bruin");
-  }
-
-  void LijnSensor::kalibreerGrijs() {
-    kalibreer("grijs");
-  }
-
-  void LijnSensor::kalibreerAlles() {
-    kalibreerWit();
-    kalibreerZwart();
-    kalibreerGroen();
-    kalibreerGrijs();
-    kalibreerBruin();
-    xbeePointer->printLineBreak();
-  }
-
-  void LijnSensor::kalibreerLijn() {
-    sensoren.calibrate();
-  }
+bool LijnSensor::getLijnKleur() {
+  return groeneLijn;
+}
