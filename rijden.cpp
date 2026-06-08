@@ -1,0 +1,70 @@
+#include "rijden.h"
+
+Rijden::Rijden(Xbee* x, LijnSensor* l):lineSensors(l),xbeePointer(x) {
+  snelheid[0] = 0;
+  snelheid[1] = 0;
+} //constructor voor de zumo die de snelheid meteen op 0 zet
+
+int Rijden::getSnelheid() const {
+  return snelheid; //geeft de snelheid als de gebruiker erom vraagt
+}
+
+void Rijden::initialiseer() {
+  setSnelheid(CALIBRATE_SPEED);
+  lineSensors->kalibreerLijn();
+  for(int i = 0; i<200; i++) {
+    delay(20);
+    lineSensors->kalibreerLijn();
+    if(i >= 50 && i <= 150) {
+      setSnelheid(-1 * CALIBRATE_SPEED, CALIBRATE_SPEED);
+    } else {
+      setSnelheid(CALIBRATE_SPEED, -1 * CALIBRATE_SPEED);
+    }
+  }
+  Stop(); //de zumo draait naar links, naar rechts en weer terug naar het midden
+}
+
+void Rijden::setSnelheid(int nieuweSnelheid) {
+  snelheid[0] = nieuweSnelheid;
+  snelheid[1] = nieuweSnelheid;
+  motorenVanZumo.setSpeeds(nieuweSnelheid, nieuweSnelheid); //verandert de snelheid van de zumo
+}
+
+void Rijden::setSnelheid(int l, int r) {
+    snelheid[0] = l;
+    snelheid[1] = 2;
+    motorenVanZumo.setSpeeds(l, r);
+}
+
+void Rijden::naarLinks() {
+  setSnelheid(-1 * CRUISE_SPEED, CRUISE_SPEED) ;//maakt de snelheid van de linker motor negatief zodat de zumo naar links draait
+}
+
+void Rijden::naarRechts() {
+  motorenVanZumo.setSpeeds(CRUISE_SPEED, -1 * CRUISE_SPEED); //maakt de snelheid van de rechter motor negatief zodat de zumo naar rechts draait
+}
+
+void Rijden::Stop() {
+  snelheid[0] = 0;
+  snelheid[1] = 0;
+  motorenVanZumo.setSpeeds(0, 0); //zet de snelheid van de zumo op 0
+}
+
+void Rijden::Achteruit() {
+  snelheid[0] *= -1;
+  snelheid[1] *= -1;
+  motorenVanZumo.setSpeeds(snelheid[0], snelheid[1]); //maakt bijde motoren dezelfde snelheid alleen dan negatief
+}
+
+void Rijden::stuur(int lijnPositie) {
+    bool richting = false; // richting true is naar links richting false is naar rechts
+    if (lijnPositie < 2300 && lijnPositie > 1700) {
+      setSnelheid(CRUISE_SPEED);
+      return;
+    }
+    int leftSpeed = (lijnPositie / 4000) * CRUISE_SPEED;
+    int rightSpeed = CRUISE_SPEED - ((lijnPositie / 4000) * CRUISE_SPEED);
+
+    setSnelheid(leftSpeed, rightSpeed);
+
+}
