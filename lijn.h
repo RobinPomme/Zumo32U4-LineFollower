@@ -20,7 +20,7 @@ class LijnSensor {
 
 public:
   LijnSensor(Xbee*);
-
+  int leesLijnPositieTest();
   KalibratieData kalibreer(String kleur);  ///< kalibreert de sensoren
   void kalibreerAlles();
   void kalibreerLijn();
