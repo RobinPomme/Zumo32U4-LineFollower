@@ -7,9 +7,9 @@
 #define MAX_SPEED 400
 #define CRUISE_SPEED 300
 #define CALIBRATE_SPEED 200
-#define CONSTANT_P 2
-#define CONSTANT_I 1
-#define CONSTANT_D 1
+#define CONSTANT_P 0.5
+#define CONSTANT_I 0
+#define CONSTANT_D 0
 
 class Rijden {
   private:
