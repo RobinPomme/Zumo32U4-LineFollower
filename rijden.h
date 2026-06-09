@@ -5,9 +5,9 @@
 #include "lijn.h"
 
 #define MAX_SPEED 400
-#define CRUISE_SPEED 300
+#define CRUISE_SPEED 250
 #define CALIBRATE_SPEED 200
-#define CONSTANT_P 0.5
+#define CONSTANT_P 0.55
 #define CONSTANT_I 0
 #define CONSTANT_D 0
 
@@ -16,6 +16,8 @@ class Rijden {
     int snelheid[2]; //een variabele om de snelheid bij te houden
     int richting; //een variabele om de richting in op te slaan
     int error;
+    int afgeleide;
+    long integraal;
     Zumo32U4Motors motorenVanZumo; //maakt een nieuw object voor de motoren van de zumo
     LijnSensor* lineSensors;
     Xbee* xbeePointer;

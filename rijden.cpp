@@ -1,6 +1,6 @@
 #include "rijden.h"
 
-Rijden::Rijden(Xbee* x, LijnSensor* l): lineSensors(l), xbeePointer(x) {
+Rijden::Rijden(Xbee* x, LijnSensor* l): lineSensors(l), xbeePointer(x),afgeleide(0),integraal(0) {
   snelheid[0] = 0;
   snelheid[1] = 0;
 }  //constructor voor de zumo die de snelheid meteen op 0 zet
@@ -55,31 +55,23 @@ void Rijden::Achteruit() {
   snelheid[1] *= -1;
   motorenVanZumo.setSpeeds(snelheid[0], snelheid[1]);  //maakt bijde motoren dezelfde snelheid alleen dan negatief
 }
-/*
-void Rijden::stuur(int lijnPositie) {
-  int snelheid = lineSensors->getLijnKleur() ? CRUISE_SPEED / 2 : CRUISE_SPEED;
-  if (lijnPositie == -1) {
-    Achteruit();
-    return;
-  }
-  
-  if ((lijnPositie < 2300 && lijnPositie > 1700)) {
-    setSnelheid(snelheid);
-    return;
-  }
 
-  setSnelheid(leftSpeed, rightSpeed);
-}
-*/
 void Rijden::pidController(int lijnPositie) {
   if (lijnPositie == -1) {
     return;
   }
   error = 3000 - lijnPositie;
-  double Yp = CONSTANT_P * (double)error;
-  int integraal = 0; //voor toekomstig gebruik
-  int afgeleide = 0; // voor toekomstig gebruik
-  int output = Yp + (CONSTANT_I * integraal) + (CONSTANT_D * afgeleide);
+
+  double Yp = CONSTANT_P * error;
+
+  integraal += error;
+  double Yi = integraal * CONSTANT_I;
+
+  double Yd = (error - afgeleide) * CONSTANT_D;
+  afgeleide = error;
+
+
+  int output = Yp + Yi + Yd;
 
   int snelheid = lineSensors->getLijnKleur() ? CRUISE_SPEED / 2 : CRUISE_SPEED;
 
