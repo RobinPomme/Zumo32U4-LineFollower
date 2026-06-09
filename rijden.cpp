@@ -73,3 +73,8 @@ void Rijden::stuur(int lijnPositie) {
 
   setSnelheid(leftSpeed, rightSpeed);
 }
+
+void Rijden::pidController(int lijnPositie) {
+  error = 2000 - lijnPositie;
+  double Yp = CONSTANT_P * error;
+}
