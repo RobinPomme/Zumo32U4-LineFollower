@@ -20,22 +20,22 @@ public:
      * \brief Controleert of een object zichtbaar is.
      * \return true als een object gedetecteerd wordt, anders false.
      */
-    bool objectVisible();
+    bool objectZichtbaar();
 
-    int objectDirection();
+    int objectRichting();
 
     /**
      * \brief Stelt de drempelwaarde voor object detectie in.
      * \param threshold De nieuwe drempelwaarde.
      */
-    void setObjectThreshold(int threshold);
+    void setObjectDrempelwaarde(int threshold);
 
-    void printFullReadings() const;
+    void printAlles() const;
 
 private:
     Zumo32U4ProximitySensors zumoProxSensors;
-    static const int defaultObjectThreshold = 1;
-    int objectThreshold;
+    static const int defaultObjectDrempelwaarde = 1;
+    int objectDrempelwaarde;
     Xbee* xbee;
 };
 

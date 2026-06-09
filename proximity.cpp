@@ -2,12 +2,12 @@
 
 ProximitySensor::ProximitySensor(Xbee* x):xbee(x) {
     zumoProxSensors.initThreeSensors();
-    objectThreshold = defaultObjectThreshold;
+    objectDrempelwaarde = defaultObjectDrempelwaarde;
 }
 
-bool ProximitySensor::objectVisible() {
+bool ProximitySensor::objectZichtbaar() {
     zumoProxSensors.read();
-    return (zumoProxSensors.countsFrontWithLeftLeds() >= objectThreshold) || (zumoProxSensors.countsFrontWithRightLeds() >= objectThreshold);
+    return (zumoProxSensors.countsFrontWithLeftLeds() >= objectDrempelwaarde) || (zumoProxSensors.countsFrontWithRightLeds() >= objectDrempelwaarde);
 }
 
 /*  -1 = Beide 0
@@ -15,19 +15,19 @@ bool ProximitySensor::objectVisible() {
     1 = Links
     2 = Rechts
     Default 0 */
-int ProximitySensor::objectDirection() {
+int ProximitySensor::objectRichting() {
     int direction = 0;
     zumoProxSensors.read();
 
-    if (this->objectvisible()) {
-        int leftLedReading = zumoProxSensors.countsFrontWithLeftLeds();
-        int rightLedReading = zumoProxSensors.countsFrontWithRightLeds();
+    if (this->objectZichtbaar()) {
+        int ledWaardeLinks = zumoProxSensors.countsFrontWithLeftLeds();
+        int ledWaardeRechts = zumoProxSensors.countsFrontWithRightLeds();
 
-        if (leftLedReading == rightLedReading){
+        if (ledWaardeLinks == ledWaardeRechts){
             return 0;
-        } else if (leftLedReading > rightLedReading) {
+        } else if (ledWaardeLinks > ledWaardeRechts) {
             return 1;
-        } else if (rightLedReading > leftLedReading) {
+        } else if (ledWaardeRechts > ledWaardeLinks) {
             return 2;
         }
     } else {
@@ -35,7 +35,7 @@ int ProximitySensor::objectDirection() {
     }
 }
 
-void ProximitySensor::printFullReadings() const{
+void ProximitySensor::printAlles() const{
     zumoProxSensors.read();
 
     xbee->printLineBreak();
@@ -44,13 +44,13 @@ void ProximitySensor::printFullReadings() const{
     xbee->print("\nLeft: " + String(zumoProxSensors.countsFrontWithLeftLeds()));
     xbee->print("\nRight: " + String(zumoProxSensors.countsFrontWithRightLeds()));
 
-    xbee->print("\nobjectVisible: ");
-    xbee->print(objectVisible() ? "True" : "False");
+    xbee->print("\nobjectZichtbaar: ");
+    xbee->print(objectZichtbaar() ? "True" : "False");
 
     xbee->printLineBreak();
 }
 
 /** \brief Geeft de huidige drempelwaarde objectafstandmeting. */
-void ProximitySensor::setObjectThreshold(int threshold) {
-    this->objectThreshold = threshold;
+void ProximitySensor::setObjectDrempelwaarde(int threshold) {
+    this->objectDrempelwaarde = threshold;
 }
