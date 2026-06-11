@@ -5,11 +5,11 @@
 #include "lijn.h"
 
 #define MAX_SPEED 400
-#define CRUISE_SPEED 250
+#define CRUISE_SPEED 300
 #define CALIBRATE_SPEED 200
-#define CONSTANT_P 0.55
+#define CONSTANT_P 0.9
 #define CONSTANT_I 0
-#define CONSTANT_D 0
+#define CONSTANT_D 1.5
 
 class Rijden {
   private:

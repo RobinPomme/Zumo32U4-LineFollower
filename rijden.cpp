@@ -70,7 +70,6 @@ void Rijden::pidController(int lijnPositie) {
   double Yd = (error - afgeleide) * CONSTANT_D;
   afgeleide = error;
 
-
   int output = Yp + Yi + Yd;
 
   int snelheid = lineSensors->getLijnKleur() ? CRUISE_SPEED / 2 : CRUISE_SPEED;
