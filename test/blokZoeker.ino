@@ -7,7 +7,7 @@ Xbee xbee;
 ProximitySensor proxSensor(&xbee);
 LijnSensor lijnsens(&xbee);
 Rijden motor(&xbee, &lijnsens);
-BlokZoeker blok(&proxSensor, &motor);
+BlokZoeker blok(&proxSensor, &motor, &lijnsens);
 
 void setup() {
     Serial.begin(115200);
@@ -18,11 +18,18 @@ void setup() {
 
     motor.initialiseer();
     Serial.println("Motor init");
+
+    lijnsens.kalibreerAlles();
+    Serial.println("Lijn init");
 }
 
 void loop() {
-    // proxSensor.printAlles();
-
-    // proxSensor.printAlles();
-    blok.zoekBlok();
+  // proxSensor.printAlles();
+  // proxSensor.printAlles();
+  blok.zoekBlok();
+  blok.duwBlok();
+  Serial.print("Klaar.");
+  while (true) {
+    //
+  }
 }

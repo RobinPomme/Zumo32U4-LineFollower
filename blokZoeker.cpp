@@ -1,19 +1,27 @@
 #include "blokZoeker.h"
 
-BlokZoeker::BlokZoeker(ProximitySensor* p, Rijden* r):proxSensors(p),motors(r){
+BlokZoeker::BlokZoeker(ProximitySensor* p, Rijden* r, LijnSensor* l):proxSensors(p),motors(r),lineSensors(l){
     this->blokGevonden = false;
+}
+
+void BlokZoeker::setBlokGevonden(bool status){
+    this->blokGevonden = status;
 }
 
 void BlokZoeker::rijNaarMidden(){
     // Rijd 20cm naar midden
     // TODO: Daadwerkelijk 20cm rijden
+    
+    // motors->setSnelheid();
+
     motors->Stop();
 }
 
 bool BlokZoeker::zoekBlok(){
     proxSensors->setObjectDrempelwaarde(3);
     // int objectRichting = -1;
-    // TESTING! voor constante volging
+
+    // TESTING! voor constante tracking
     // this->blokGevonden = false;
 
 
@@ -47,8 +55,16 @@ bool BlokZoeker::zoekBlok(){
 }
 
 void BlokZoeker::duwBlok(){
+    // bool borderReached = false;
+    
     // Duw blok uit cirkel
     motors->setSnelheid(CRUISE_SPEED, CRUISE_SPEED);
-    // Herhaal of blok zichtbaar is
+    // zwartGedetecteerd() is private, maar lijnLijn() werkt niet voor deze doelen.
+    // TODO: Andere functie gebruiken voor lijndetectie.
+    while (!this->lineSensors->zwartGedetecteerd()){
+        // Blijf hierin hangen tot lijn gezien is.
+        Serial.print("\nLijn niet zichtbaar");
+    }
+    Serial.print("\nLijn zichtbaar");
     motors->Stop();
 }
