@@ -9,9 +9,8 @@
 class BlokZoeker {
 public:
     BlokZoeker(ProximitySensor*, Rijden*);
-    void zoekBlok();
+    bool zoekBlok();
     void rijNaarMidden();
-    void zoekBlok();
     void duwBlok();
 private:
     ProximitySensor* proxSensors;
