@@ -69,10 +69,6 @@ int LijnSensor::leesLijnPositieTest() {
  * @brief geeft de positie van de lijn
  */
 int LijnSensor::leesPositie() {
-  /*int test = sensoren.readLine(waarden);
-    xbeePointer->printXbee(test);
-    return test;
-    */
   if (zwartGedetecteerd() || groenGedetecteerd()) {
     KalibratieData gemiddeldeMeting = getGemiddeldeMeting(3);
     long totaal = 0;
@@ -92,6 +88,7 @@ int LijnSensor::leesPositie() {
 /**
  * @brief geeft true terug als die een lijn ziet
  */
+ /*
 bool LijnSensor::zietLijn() {
   bool zwartGezien = false;
   bool groenGezien = false;
@@ -111,6 +108,7 @@ bool LijnSensor::zietLijn() {
   xbeePointer->printLineBreak();
   return zwartGezien || groenGezien;
 }
+*/
 
 void LijnSensor::kalibreerWit() {
   kalibreer("wit");
@@ -120,7 +118,7 @@ void LijnSensor::kalibreerWit() {
 void LijnSensor::kalibreerZwart() {
   KalibratieData zwarteData = kalibreer("zwart");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenZwart.minimum[i] = zwarteData.minimum[i] * 0.2;
+    drempelwaardenZwart.minimum[i] = zwarteData.minimum[i] * 0.4;
     drempelwaardenZwart.maximum[i] = zwarteData.maximum[i] * 1.5;
     drempelwaardenZwart.gemiddelde[i] = zwarteData.gemiddelde[i];
   }
@@ -129,14 +127,14 @@ void LijnSensor::kalibreerZwart() {
 void LijnSensor::kalibreerGroen() {
   KalibratieData groeneData = kalibreer("groen");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenGroen.minimum[i] = groeneData.minimum[i] * 0.5;
+    drempelwaardenGroen.minimum[i] = groeneData.minimum[i] * 0.2;
     drempelwaardenGroen.maximum[i] = groeneData.maximum[i] * 1.5;
     drempelwaardenGroen.gemiddelde[i] = groeneData.gemiddelde[i];
   }
 }
 
 void LijnSensor::kalibreerBruin() {
-  kalibreer("bruin");
+  drempelwaardenBruin = kalibreer("bruin");
 }
 
 void LijnSensor::kalibreerGrijs() {
