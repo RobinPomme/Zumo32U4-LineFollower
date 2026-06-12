@@ -4,7 +4,8 @@
 /**
  * @brief initialliseert de 5 sensoren van de ZUMO
  */
-LijnSensor::LijnSensor(Xbee* x): xbeePointer(x), groeneLijn(false) {
+LijnSensor::LijnSensor(Xbee* x)
+  : xbeePointer(x), groeneLijn(false),bruinGezien(false) {
   sensoren.initFiveSensors();
 }
 
@@ -15,7 +16,7 @@ KalibratieData LijnSensor::getGemiddeldeMeting(int aantalMetingen) {
 
   unsigned long totaal[NUMSENSORS];
 
-  for (int i = 0; i<NUMSENSORS; i++) {
+  for (int i = 0; i < NUMSENSORS; i++) {
     totaal[i] = waarden[i];
     resultaat.minimum[i] = waarden[i];
     resultaat.maximum[i] = waarden[i];
@@ -75,6 +76,7 @@ int LijnSensor::leesLijnPositieTest() {
  */
 int LijnSensor::leesPositie() {
   KalibratieData laatsteMeting = getGemiddeldeMeting(1);
+  bruinGezien = bruinGedetecteerd(laatsteMeting);
   if (zwartGedetecteerd(laatsteMeting) || groenGedetecteerd(laatsteMeting)) {
     KalibratieData gemiddeldeMeting = getGemiddeldeMeting(1);
     long totaal = 0;
@@ -87,14 +89,13 @@ int LijnSensor::leesPositie() {
       return -1;
     }
     return gewogenGemiddelde / totaal;
-
   }
   return -1;
 }
 /**
  * @brief geeft true terug als die een lijn ziet
  */
- /*
+/*
 bool LijnSensor::zietLijn() {
   bool zwartGezien = false;
   bool groenGezien = false;
@@ -162,7 +163,7 @@ void LijnSensor::kalibreerAlles() {
   kalibreerZwart();
   kalibreerGroen();
   //kalibreerGrijs();
-  //kalibreerBruin();
+  kalibreerBruin();
   xbeePointer->printLineBreak();
 }
 
@@ -190,6 +191,19 @@ bool LijnSensor::zwartGedetecteerd(KalibratieData meting) {
   return false;
 }
 
+bool LijnSensor::bruinGedetecteerd(KalibratieData meting) {
+  for (int i = 0; i < NUMSENSORS; i++) {
+    if (meting.gemiddelde[i] <= drempelwaardenBruin.maximum[i] && meting.gemiddelde[i] >= drempelwaardenBruin.minimum[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
 bool LijnSensor::getLijnKleur() {
   return groeneLijn;
+}
+
+bool LijnSensor::zagBruin() {
+  return bruinGezien;
 }

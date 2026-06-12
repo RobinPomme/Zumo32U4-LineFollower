@@ -22,6 +22,7 @@ public:
   LijnSensor(Xbee*);
   //int leesLijnPositieTest();
   KalibratieData kalibreer(String kleur);  ///< kalibreert de sensoren
+  bool zagBruin();
   void kalibreerAlles();
   void kalibreerLijn();
   void kalibreerWit();
@@ -30,9 +31,9 @@ public:
   void kalibreerGrijs();
   void kalibreerBruin();
   int leesPositie();                 ///< geeft de positie van de lij
-  bool zietLijn();                   ///< geeft true als hij de lijn ziet
-  bool zietLinks();                  ///< geeft true als hij de lijn links ziet
-  bool zietRechts();                 ///< geeft true als hij de lijn rechts ziet
+  //bool zietLijn();                   ///< geeft true als hij de lijn ziet
+  //bool zietLinks();                  ///< geeft true als hij de lijn links ziet
+  //bool zietRechts();                 ///< geeft true als hij de lijn rechts ziet
   unsigned int* getSensorWaarden();  ///< geeft de waarde terug van de sensoren
   bool getLijnKleur();
 
@@ -40,6 +41,7 @@ private:
   KalibratieData getGemiddeldeMeting(int);
   bool zwartGedetecteerd(KalibratieData);
   bool groenGedetecteerd(KalibratieData);
+  bool bruinGedetecteerd(KalibratieData);
   bool groeneLijn;
   bool grijsLinks;
   bool grijsRechts;
