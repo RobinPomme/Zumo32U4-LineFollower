@@ -61,7 +61,7 @@ void BlokZoeker::duwBlok(){
     motors->setSnelheid(CRUISE_SPEED, CRUISE_SPEED);
     // zwartGedetecteerd() is private, maar lijnLijn() werkt niet voor deze doelen.
     // TODO: Andere functie gebruiken voor lijndetectie.
-    while (!this->lineSensors->zwartGedetecteerd()){
+    while (this->lineSensors->leesPositie() = -1){
         // Blijf hierin hangen tot lijn gezien is.
         Serial.print("\nLijn niet zichtbaar");
     }
