@@ -10,13 +10,12 @@ bool ProximitySensor::objectZichtbaar() {
     return (zumoProxSensors.countsFrontWithLeftLeds() >= objectDrempelwaarde) || (zumoProxSensors.countsFrontWithRightLeds() >= objectDrempelwaarde);
 }
 
-/*  -1 = Beide 0
+/*  -1 = Geen object zicthbaar
     0 = Beide L & R gelijke waarde
     1 = Links
     2 = Rechts
     Default 0 */
 int ProximitySensor::objectRichting() {
-    int direction = 0;
     zumoProxSensors.read();
 
     if (this->objectZichtbaar()) {
