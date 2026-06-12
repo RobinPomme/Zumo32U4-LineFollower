@@ -20,7 +20,7 @@ class LijnSensor {
 
 public:
   LijnSensor(Xbee*);
-  int leesLijnPositieTest();
+  //int leesLijnPositieTest();
   KalibratieData kalibreer(String kleur);  ///< kalibreert de sensoren
   void kalibreerAlles();
   void kalibreerLijn();
@@ -38,9 +38,12 @@ public:
 
 private:
   KalibratieData getGemiddeldeMeting(int);
-  bool zwartGedetecteerd();
-  bool groenGedetecteerd();
+  bool zwartGedetecteerd(KalibratieData);
+  bool groenGedetecteerd(KalibratieData);
   bool groeneLijn;
+  bool grijsLinks;
+  bool grijsRechts;
+  bool bruinGezien;
   Zumo32U4LineSensors sensoren;
   unsigned int waarden[NUMSENSORS];  ///< hier wordt de array van de sensor waarden in
   KalibratieData drempelwaardenZwart;
