@@ -7,12 +7,16 @@
 #define MAX_SPEED 400
 #define CRUISE_SPEED 300
 #define CALIBRATE_SPEED 200
-#define CONSTANT_P 0.9
-#define CONSTANT_I 0
-#define CONSTANT_D 1.5
+
+#define CONSTANT_P 0.75
+#define CONSTANT_I 0.05
+#define CONSTANT_D 1.55 //dit zijn nu mooie waarden (Kp = 0.75, Ki = 0, Kd = 1.55 met snelheid = 300 en max in pid = max_speed)
+
+#define BUFFER_COUNT 6
 
 class Rijden {
   private:
+    bool resetBuffer[BUFFER_COUNT];
     int snelheid[2]; //een variabele om de snelheid bij te houden
     int richting; //een variabele om de richting in op te slaan
     int error;
