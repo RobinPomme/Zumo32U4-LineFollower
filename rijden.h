@@ -10,7 +10,7 @@
 
 #define CONSTANT_P 0.75
 #define CONSTANT_I 0.05
-#define CONSTANT_D 1.55 //dit zijn nu mooie waarden (Kp = 0.75, Ki = 0, Kd = 1.55 met snelheid = 300 en max in pid = max_speed)
+#define CONSTANT_D 1.55 //dit zijn nu mooie waarden (Kp = 0.75, Ki = 0.05, Kd = 1.55 met snelheid = 300 en max in pid = max_speed)
 
 #define BUFFER_COUNT 6
 
