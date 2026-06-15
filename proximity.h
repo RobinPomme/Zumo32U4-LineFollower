@@ -1,0 +1,42 @@
+#ifndef PROXIMITY_H
+#define PROXIMITY_H
+
+#include <Wire.h>
+#include <Zumo32U4.h>
+#include "xbee.h"
+
+/**
+ * \brief Klasse voor het beheer van de proximity sensoren op de Zumo32U4.
+ *
+ * Deze klasse geeft functionaliteit om proximity sensoren te initialiseren, waarden te lezen en objectafstanden te lezen.
+ */
+class ProximitySensor {
+public:
+
+    /** \brief Constructor voor ProximitySensor. */
+    ProximitySensor(Xbee*);
+
+    /**
+     * \brief Controleert of een object zichtbaar is.
+     * \return true als een object gedetecteerd wordt, anders false.
+     */
+    bool objectZichtbaar();
+
+    int objectRichting();
+
+    /**
+     * \brief Stelt de drempelwaarde voor object detectie in.
+     * \param threshold De nieuwe drempelwaarde.
+     */
+    void setObjectDrempelwaarde(int threshold);
+
+    void printAlles() const;
+
+private:
+    Zumo32U4ProximitySensors zumoProxSensors;
+    static const int defaultObjectDrempelwaarde = 1;
+    int objectDrempelwaarde;
+    Xbee* xbee;
+};
+
+#endif // PROXIMITY_H
