@@ -38,7 +38,8 @@ void loop() {
     int lijnPositie = lijnSensor.leesPositie();
 
     if(blokjesTijd) {
-
+      // motor stop
+      //rijdnaarmidden()
     } else {
       Motors.pidController(lijnPositie);
     }

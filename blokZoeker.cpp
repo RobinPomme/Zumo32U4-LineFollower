@@ -1,6 +1,6 @@
 #include "blokZoeker.h"
 
-BlokZoeker::BlokZoeker(ProximitySensor* p, Rijden* r, LijnSensor* l):proxSensors(p),motors(r),lineSensors(l){
+BlokZoeker::BlokZoeker(ProximitySensor* p, Rijden* r, LijnSensor* l, Encoder* e):proxSensors(p),motors(r),lineSensors(l),encoder(e){
     this->blokGevonden = false;
 }
 
@@ -10,10 +10,10 @@ void BlokZoeker::setBlokGevonden(bool status){
 
 void BlokZoeker::rijNaarMidden(){
     // Rijd 20cm naar midden
-    // TODO: Daadwerkelijk 20cm rijden
-    
-    // motors->setSnelheid();
-
+    encoder->init();
+    while ((encoder->countsToCm(encoder->getCountsLeft()) <= 20) && (encoder->countsToCm(encoder->getCountsRight()) <= 20)){
+        motors->setSnelheid(CRUISE_SPEED, CRUISE_SPEED);
+    }
     motors->Stop();
 }
 
