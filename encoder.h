@@ -5,21 +5,22 @@
 class Encoder{
 public:
 
-
-  static void init();
-  static int getCountsLeft();
-  static int getCountsRight();
-  static float countsToCm(int counts);
+  Encoder();
+  void init();
+  int getCountsLeft();
+  int getCountsRight();
+  float countsToCm(int counts);
 
 
 private:
-  static const int count = 910;
-  static const float wheel;
-  static const float cm;
+  Zumo32U4Encoders superCooleExtraToffeEncodersVanZumoOfzo;
+  const int count = 910;
+  const float wheel;
+  const float cm;
 
-  static int countLeft;
-  static int countRight;
-  static bool initialized;
+  long countLeft;
+  long countRight;
+  bool initialized;
 
 };
 #endif

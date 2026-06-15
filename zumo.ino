@@ -20,15 +20,15 @@ const unsigned long ENCODER_INTERVAL = 500;
 unsigned long vorigeEncoderTijd = 0;
 
 void stuurEncoderData() {
-    int links  = Encoder::getCountsLeft();
-    int rechts = Encoder::getCountsRight();
+    int links  = encoder.getCountsLeft();
+    int rechts = encoder.getCountsRight();
 
     xbee.printLineBreak();
     xbee.printXbee("=== Encoder waarden ===");
     xbee.printXbee("Links  (counts): " + String(links));
     xbee.printXbee("Rechts (counts): " + String(rechts));
-    xbee.printXbee("Links  (cm): " + String(Encoder::countsToCm(links)));
-    xbee.printXbee("Rechts (cm): " + String(Encoder::countsToCm(rechts)));
+    xbee.printXbee("Links  (cm): " + String(encoder.countsToCm(links)));
+    xbee.printXbee("Rechts (cm): " + String(encoder.countsToCm(rechts)));
     xbee.printLineBreak();
 }
 
@@ -45,7 +45,7 @@ void setup() {
 
     Motors.initialiseer();
     lijnSensor.kalibreerAlles();
-    Encoder::init();
+    encoder.init();
 
     pauzeTijd    = true;
     blokjesTijd  = false;
@@ -74,12 +74,12 @@ void loop() {
     if (!pauzeTijd) {
         int lijnPositie = lijnSensor.leesPositie();
 
-        if (blokjesTijd) {
+        //if (blokjesTijd) {
             // TODO: blokjes logica hier
             // bv. Motors.rijAfstand(Encoder::getCountsLeft(), 20.0f);
-        } else {
+        //} else {
             Motors.pidController(lijnPositie);
-        }
+        //}
 
     } else {
         Motors.Stop();
