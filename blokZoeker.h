@@ -6,10 +6,11 @@
 #include "proximity.h"
 #include "rijden.h"
 #include "lijn.h"
+#include "encoder.h"
 
 class BlokZoeker {
 public:
-    BlokZoeker(ProximitySensor*, Rijden*, LijnSensor*);
+    BlokZoeker(ProximitySensor*, Rijden*, LijnSensor*, Encoder*);
     bool zoekBlok();
     void rijNaarMidden();
     void duwBlok();
@@ -18,6 +19,7 @@ private:
     ProximitySensor* proxSensors;
     Rijden* motors;
     LijnSensor* lineSensors;
+    Encoder* encoder;
     bool blokGevonden;
 };
 
