@@ -20,8 +20,7 @@ void setup() {
   xbee.printXbee("Om te beginnen, druk op knop b");
   xbee.printLineBreak();
   knopB.waitForButton();
-  Motors.initialiseer();  //initialiseert de motoren (doet niet heel veel de zumo draait naar links, naar rechts en terug naar het midden)
-  lijnSensor.kalibreerAlles();
+  Motors.initialiseer();  //initialiseert de motoren en begint daarna met het kalibreren van de lijnsensors
   pauzeTijd = true;
   blokjesTijd = false;
 }
