@@ -42,9 +42,11 @@ private:
   bool zwartGedetecteerd(KalibratieData);
   bool groenGedetecteerd(KalibratieData);
   bool bruinGedetecteerd(KalibratieData);
+  bool grijsGedetecteerd(KalibratieData);
   bool groeneLijn;
   bool grijsLinks;
   bool grijsRechts;
+  bool grijsGezien;
   bool bruinGezien;
   Zumo32U4LineSensors sensoren;
   unsigned int waarden[NUMSENSORS];  ///< hier wordt de array van de sensor waarden in
