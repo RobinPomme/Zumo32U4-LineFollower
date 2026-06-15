@@ -2,22 +2,22 @@
 #include <Zumo32u4Encoders.h>
 
 
-Encoder::Encoder():wheel(3.9),cm((3.141592653 * wheel) / count),countLeft(0),countRight(0),initialized(false) {}
+Encoder::Encoder():wheel(3.0),cm((3.141592653 * wheel) / count),countLeft(0),countRight(0),initialized(false) {}
 
 void Encoder::init() {
   if (!initialized){
-    superCooleExtraToffeEncodersVanZumoOfzo.getCountsAndResetLeft();
-    superCooleExtraToffeEncodersVanZumoOfzo.getCountsAndResetRight();
+    extraEncoder.getCountsAndResetLeft();
+    extraEncoder.getCountsAndResetRight();
     initialized = true;
   }
 }
 int Encoder::getCountsLeft(){
-    countLeft = superCooleExtraToffeEncodersVanZumoOfzo.getCountsAndResetLeft();
+   countLeft = extraEncoder.getCountsLeft();
     return countLeft;
 }
 
 int Encoder::getCountsRight(){
-    countRight = superCooleExtraToffeEncodersVanZumoOfzo.getCountsAndResetRight();
+    countRight = extraEncoder.getCountsRight();
     return countRight;
 }
 

@@ -13,7 +13,7 @@ public:
 
 
 private:
-  Zumo32U4Encoders superCooleExtraToffeEncodersVanZumoOfzo;
+  Zumo32U4Encoders extraEncoder;
   const int count = 910;
   const float wheel;
   const float cm;
