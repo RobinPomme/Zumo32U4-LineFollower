@@ -9,6 +9,11 @@ LijnSensor::LijnSensor(Xbee* x)
   sensoren.initFiveSensors();
 }
 
+bool LijnSensor::getZwartGezien() {
+  KalibratieData meting = getGemiddeldeMeting(3);
+  return zwartGedetecteerd(meting);
+}
+
 KalibratieData LijnSensor::getGemiddeldeMeting(int aantalMetingen) {
   KalibratieData resultaat;
 

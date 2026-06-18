@@ -8,12 +8,14 @@
 #include "lijn.h"
 #include "encoder.h"
 
+#define ZWARTBUFFER 10
+
 class BlokZoeker {
 public:
     BlokZoeker(ProximitySensor*, Rijden*, LijnSensor*, Encoder*);
     bool zoekBlok();
     void rijNaarMidden();
-    void duwBlok();
+    void duwBlok(Xbee*);
     void setBlokGevonden(bool);
 private:
     ProximitySensor* proxSensors;
