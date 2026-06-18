@@ -148,8 +148,8 @@ void LijnSensor::kalibreerGroen() {
 void LijnSensor::kalibreerBruin() {
   KalibratieData bruineData = kalibreer("bruin");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenBruin.minimum[i] = bruineData.minimum[i] * 0.2;
-    drempelwaardenBruin.maximum[i] = bruineData.maximum[i] * 1.5;
+    drempelwaardenBruin.minimum[i] = bruineData.minimum[i] * 0.9;
+    drempelwaardenBruin.maximum[i] = bruineData.maximum[i] * 1.1;
     drempelwaardenBruin.gemiddelde[i] = bruineData.gemiddelde[i];
   }
 }
@@ -157,17 +157,17 @@ void LijnSensor::kalibreerBruin() {
 void LijnSensor::kalibreerGrijs() {
   KalibratieData grijzeData = kalibreer("grijs");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenGrijs.minimum[i] = grijzeData.minimum[i] * 0.2;
-    drempelwaardenGrijs.maximum[i] = grijzeData.maximum[i] * 1.5;
+    drempelwaardenGrijs.minimum[i] = grijzeData.minimum[i] * 0.7;
+    drempelwaardenGrijs.maximum[i] = grijzeData.maximum[i] * 1.3;
     drempelwaardenGrijs.gemiddelde[i] = grijzeData.gemiddelde[i];
   }
 }
 
 void LijnSensor::kalibreerAlles() {
-  //kalibreerWit();
+  kalibreerWit();
   kalibreerZwart();
   kalibreerGroen();
-  //kalibreerGrijs();
+  kalibreerGrijs();
   kalibreerBruin();
   xbeePointer->printLineBreak();
 }
@@ -203,6 +203,18 @@ bool LijnSensor::bruinGedetecteerd(KalibratieData meting) {
     }
   }
   return false;
+}
+
+bool LijnSensor::grijsGedetecteerd(KalibratieData meting) {
+  grijsLinks = false;
+  grijsRechts = false;
+  if (meting.gemiddelde[0] <= drempelwaardenGrijs.maximum[0] && meting.gemiddelde[0] >= drempelwaardenGrijs.minimum[0]) {
+    grijsLinks = true;
+  }
+  if (meting.gemiddelde[4] <= drempelwaardenGrijs.maximum[4] && meting.gemiddelde[4] >= drempelwaardenGrijs.minimum[4]) {
+    grijsRechts = true;
+  }
+  return grijsLinks && grijsRechts;
 }
 
 bool LijnSensor::getLijnKleur() {
