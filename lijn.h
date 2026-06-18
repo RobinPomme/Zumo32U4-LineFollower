@@ -45,6 +45,7 @@ private:
   bool grijsLinks;
   bool grijsRechts;
   bool bruinGezien;
+  int laatsteLijn;
   Zumo32U4LineSensors sensoren;
   unsigned int waarden[NUMSENSORS];  ///< hier wordt de array van de sensor waarden in
   KalibratieData drempelwaardenZwart;

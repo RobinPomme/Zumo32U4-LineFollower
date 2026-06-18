@@ -43,9 +43,10 @@ void loop() {
 
   if (!pauzeTijd) {
     int lijnPositie = lijnSensor.leesPositie();
-    blokjesTijd = lijnSensor.zagBruin();
+    //blokjesTijd = lijnSensor.zagBruin();
     if(blokjesTijd) {
-      Motors.stop()
+      xbee.printXbee("Bruin gezien!");
+      Motors.Stop();
       xbee.printXbee("Blokjestijd True");
       blokZoeker.rijNaarMidden();
       xbee.printXbee("Midden reached");

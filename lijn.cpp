@@ -5,7 +5,7 @@
  * @brief initialliseert de 5 sensoren van de ZUMO
  */
 LijnSensor::LijnSensor(Xbee* x)
-  : xbeePointer(x), groeneLijn(false),bruinGezien(false) {
+  : xbeePointer(x), groeneLijn(false),bruinGezien(false),laatsteLijn(3000) {
   sensoren.initFiveSensors();
 }
 
@@ -82,7 +82,22 @@ int LijnSensor::leesLijnPositieTest() {
 int LijnSensor::leesPositie() {
   KalibratieData laatsteMeting = getGemiddeldeMeting(1);
   bruinGezien = bruinGedetecteerd(laatsteMeting);
-  if (zwartGedetecteerd(laatsteMeting) || groenGedetecteerd(laatsteMeting)) {
+  if (groenGedetecteerd(laatsteMeting)) {
+    KalibratieData gemiddeldeMeting = getGemiddeldeMeting(1);
+    long totaal = 0;
+    long gewogenGemiddelde = 0;
+    for (int i = 0; i < NUMSENSORS; i++) {
+      if (gemiddeldeMeting.gemiddelde[i] <= drempelwaardenGroen.maximum[i] && gemiddeldeMeting.gemiddelde[i] >= drempelwaardenGroen.minimum[i]) {
+        totaal += gemiddeldeMeting.gemiddelde[i];
+        gewogenGemiddelde += (long)gemiddeldeMeting.gemiddelde[i] * ((i + 1) * 1000L);
+      }
+    }
+    if (totaal <= 0) {
+      return -1;
+    }
+    laatsteLijn = gewogenGemiddelde / totaal;
+    return laatsteLijn;
+  } else if (zwartGedetecteerd(laatsteMeting)) {
     KalibratieData gemiddeldeMeting = getGemiddeldeMeting(1);
     long totaal = 0;
     long gewogenGemiddelde = 0;
@@ -93,9 +108,10 @@ int LijnSensor::leesPositie() {
     if (totaal <= 0) {
       return -1;
     }
-    return gewogenGemiddelde / totaal;
+    laatsteLijn = gewogenGemiddelde / totaal;
+    return laatsteLijn;
   }
-  return -1;
+  return laatsteLijn;
 }
 /**
  * @brief geeft true terug als die een lijn ziet
@@ -128,19 +144,19 @@ void LijnSensor::kalibreerWit() {
 }
 
 void LijnSensor::kalibreerZwart() {
-  KalibratieData zwarteData = kalibreer("zwart");
+  //KalibratieData zwarteData = kalibreer("zwart");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenZwart.minimum[i] = zwarteData.minimum[i] * 0.4;
-    drempelwaardenZwart.maximum[i] = zwarteData.maximum[i] * 1.5;
-    drempelwaardenZwart.gemiddelde[i] = zwarteData.gemiddelde[i];
+    drempelwaardenZwart.minimum[i] = 250;//zwarteData.minimum[i] * 0.3;
+    drempelwaardenZwart.maximum[i] = 1500;//zwarteData.maximum[i] * 1.5;
+    drempelwaardenZwart.gemiddelde[i] = 1000;//zwarteData.gemiddelde[i];
   }
 }
 
 void LijnSensor::kalibreerGroen() {
   KalibratieData groeneData = kalibreer("groen");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenGroen.minimum[i] = groeneData.minimum[i] * 0.5;
-    drempelwaardenGroen.maximum[i] = groeneData.maximum[i] * 1.5;
+    drempelwaardenGroen.minimum[i] = groeneData.minimum[i] * 0.65;
+    drempelwaardenGroen.maximum[i] = groeneData.maximum[i] * 1;
     drempelwaardenGroen.gemiddelde[i] = groeneData.gemiddelde[i];
   }
 }
@@ -148,8 +164,8 @@ void LijnSensor::kalibreerGroen() {
 void LijnSensor::kalibreerBruin() {
   KalibratieData bruineData = kalibreer("bruin");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenBruin.minimum[i] = bruineData.minimum[i] * 0.9;
-    drempelwaardenBruin.maximum[i] = bruineData.maximum[i] * 1.1;
+    drempelwaardenBruin.minimum[i] = bruineData.minimum[i] * 0.975;
+    drempelwaardenBruin.maximum[i] = bruineData.maximum[i] * 1.025;
     drempelwaardenBruin.gemiddelde[i] = bruineData.gemiddelde[i];
   }
 }
@@ -157,18 +173,18 @@ void LijnSensor::kalibreerBruin() {
 void LijnSensor::kalibreerGrijs() {
   KalibratieData grijzeData = kalibreer("grijs");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenGrijs.minimum[i] = grijzeData.minimum[i] * 0.7;
-    drempelwaardenGrijs.maximum[i] = grijzeData.maximum[i] * 1.3;
+    drempelwaardenGrijs.minimum[i] = grijzeData.minimum[i] * 0.6;
+    drempelwaardenGrijs.maximum[i] = grijzeData.maximum[i] * 1.4;
     drempelwaardenGrijs.gemiddelde[i] = grijzeData.gemiddelde[i];
   }
 }
 
 void LijnSensor::kalibreerAlles() {
-  kalibreerWit();
+  //kalibreerWit();
   kalibreerZwart();
   kalibreerGroen();
-  kalibreerGrijs();
-  kalibreerBruin();
+  //kalibreerGrijs();
+  //kalibreerBruin();
   xbeePointer->printLineBreak();
 }
 
@@ -197,21 +213,28 @@ bool LijnSensor::zwartGedetecteerd(KalibratieData meting) {
 }
 
 bool LijnSensor::bruinGedetecteerd(KalibratieData meting) {
+  bool bruinNietGezien = false;
   for (int i = 0; i < NUMSENSORS; i++) {
     if (meting.gemiddelde[i] <= drempelwaardenBruin.maximum[i] && meting.gemiddelde[i] >= drempelwaardenBruin.minimum[i]) {
-      return true;
+    } else {
+      bruinNietGezien = true;
     }
   }
-  return false;
+  if (!bruinNietGezien) {
+    xbeePointer->printXbee("Bruin gezien!");
+  }
+  return !bruinNietGezien;
 }
 
 bool LijnSensor::grijsGedetecteerd(KalibratieData meting) {
   grijsLinks = false;
   grijsRechts = false;
   if (meting.gemiddelde[0] <= drempelwaardenGrijs.maximum[0] && meting.gemiddelde[0] >= drempelwaardenGrijs.minimum[0]) {
+    xbeePointer->printXbee("Grijs links gezien!");
     grijsLinks = true;
   }
   if (meting.gemiddelde[4] <= drempelwaardenGrijs.maximum[4] && meting.gemiddelde[4] >= drempelwaardenGrijs.minimum[4]) {
+    xbeePointer->printXbee("Grijs rechts gezien!");
     grijsRechts = true;
   }
   return grijsLinks && grijsRechts;
