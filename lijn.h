@@ -31,11 +31,13 @@ public:
   void kalibreerGrijs();
   void kalibreerBruin();
   int leesPositie();                 ///< geeft de positie van de lij
+  int leesPositieZwart();
   //bool zietLijn();                   ///< geeft true als hij de lijn ziet
   //bool zietLinks();                  ///< geeft true als hij de lijn links ziet
   //bool zietRechts();                 ///< geeft true als hij de lijn rechts ziet
   unsigned int* getSensorWaarden();  ///< geeft de waarde terug van de sensoren
   bool getLijnKleur();
+  bool getZwartGezien();
 
 private:
   KalibratieData getGemiddeldeMeting(int);

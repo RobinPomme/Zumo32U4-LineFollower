@@ -26,6 +26,7 @@ void Rijden::initialiseer() {
     }
   }
   Stop();  //de zumo draait naar links, naar rechts en weer terug naar het midden
+  lineSensors->kalibreerAlles();
 }
 
 void Rijden::setSnelheid(int nieuweSnelheid) {
