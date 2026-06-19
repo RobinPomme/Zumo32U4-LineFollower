@@ -10,7 +10,7 @@ Rijden::Rijden(Xbee* x, LijnSensor* l)
 }  //constructor voor de zumo die de snelheid meteen op 0 zet
 
 int Rijden::getSnelheid() const {
-  return snelheid;  //geeft de snelheid als de gebruiker erom vraagt
+  return snelheid[0];  //geeft de snelheid als de gebruiker erom vraagt
 }
 
 void Rijden::initialiseer() {

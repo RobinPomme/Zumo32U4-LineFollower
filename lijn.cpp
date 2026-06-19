@@ -19,7 +19,7 @@ KalibratieData LijnSensor::getGemiddeldeMeting(int aantalMetingen) {
 
   sensoren.readCalibrated(waarden);
 
-  unsigned long totaal[NUMSENSORS];
+  long totaal[NUMSENSORS];
 
   for (int i = 0; i < NUMSENSORS; i++) {
     totaal[i] = waarden[i];
@@ -81,6 +81,7 @@ int LijnSensor::leesLijnPositieTest() {
  */
 int LijnSensor::leesPositie() {
   KalibratieData laatsteMeting = getGemiddeldeMeting(1);
+  bruinGezien = bruinGedetecteerd(laatsteMeting);
 
   long totaal = 0;
   long gewogenGemiddelde = 0;
@@ -120,6 +121,7 @@ int LijnSensor::leesPositie() {
 
     laatsteLijn = gewogenGemiddelde / totaal;
     return laatsteLijn;
+  }
   //bruinGezien = bruinGedetecteerd(laatsteMeting);
   /*
   if (groenGedetecteerd(laatsteMeting)) {
@@ -150,8 +152,8 @@ int LijnSensor::leesPositie() {
     return laatsteLijn;
   }
   return laatsteLijn;
-  */
-}
+
+}  */
 /**
  * @brief geeft true terug als die een lijn ziet
  */
@@ -203,8 +205,8 @@ void LijnSensor::kalibreerGroen() {
 void LijnSensor::kalibreerBruin() {
   KalibratieData bruineData = kalibreer("bruin");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenBruin.minimum[i] = bruineData.minimum[i] * 0.975;
-    drempelwaardenBruin.maximum[i] = bruineData.maximum[i] * 1.025;
+    drempelwaardenBruin.minimum[i] = bruineData.minimum[i] * 0.9;
+    drempelwaardenBruin.maximum[i] = bruineData.maximum[i] * 1.1;
     drempelwaardenBruin.gemiddelde[i] = bruineData.gemiddelde[i];
   }
 }
@@ -223,7 +225,7 @@ void LijnSensor::kalibreerAlles() {
   kalibreerZwart();
   kalibreerGroen();
   //kalibreerGrijs();
-  //kalibreerBruin();
+  kalibreerBruin();
   xbeePointer->printLineBreak();
 }
 
@@ -255,6 +257,7 @@ bool LijnSensor::bruinGedetecteerd(KalibratieData meting) {
   bool bruinNietGezien = false;
   for (int i = 0; i < NUMSENSORS; i++) {
     if (meting.gemiddelde[i] <= drempelwaardenBruin.maximum[i] && meting.gemiddelde[i] >= drempelwaardenBruin.minimum[i]) {
+      xbeePointer->printXbee(i);
     } else {
       bruinNietGezien = true;
     }
@@ -285,4 +288,8 @@ bool LijnSensor::getLijnKleur() {
 
 bool LijnSensor::zagBruin() {
   return bruinGezien;
+}
+
+void LijnSensor::resetBruin() {
+  bruinGezien = false;
 }

@@ -6,8 +6,6 @@
 #include "xbee.h"
 
 #define NUMSENSORS 5  ///< vertelt hoeveel sensoren de ZUMO heeft
-//#define LIJNDREMPEL 500  ///< vertelt wat de drempel waarde is voor de zwarte lijn
-//#define MIDDENPOSITIE 2000 ///< vertelt wat de midden positie is
 
 struct KalibratieData {
   int minimum[NUMSENSORS];
@@ -29,11 +27,11 @@ public:
   void kalibreerGroen();
   void kalibreerGrijs();
   void kalibreerBruin();
-  int leesPositie();                 ///< geeft de positie van de lij
+  int leesPositie();                 ///< geeft de positie van de lijn
   int leesPositieZwart();
-  unsigned int* getSensorWaarden();  ///< geeft de waarde terug van de sensoren
   bool getLijnKleur();
   bool getZwartGezien();
+  void resetBruin();
 
 private:
   KalibratieData getGemiddeldeMeting(int);

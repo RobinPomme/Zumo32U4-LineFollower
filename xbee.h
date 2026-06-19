@@ -10,7 +10,7 @@ class Xbee {
         Xbee();
         char leesXbee(); //Functie definities
         void printLineBreak();
-        template <class T> void Xbee::printXbee(T m) {
+        template <class T> void printXbee(T m) {
             Serial1.println(m);
         }
 };
