@@ -44,6 +44,16 @@ void loop() {
 
   if (!pauzeTijd) {
     int lijnPositie = lijnSensor.leesPositie();
+    switch(lijnPositie) {
+      case -3:
+        Motors.setSnelheid(MAX_SPEED, -1 * MAX_SPEED);
+        delay(200);
+        break;
+      case -2:
+        Motors.setSnelheid(-1 * MAX_SPEED, MAX_SPEED);
+        delay(200);
+        break;
+    }
     blokjesTijd = lijnSensor.zagBruin();
     if(blokjesTijd) {
       xbee.printXbee("Bruin gezien!");
