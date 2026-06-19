@@ -38,6 +38,7 @@ void setup() {
 void loop() {
   if (knopA.isPressed()) {
     pauzeTijd = true;
+    lijnSensor.resetBruin();
   }
 
   if (knopC.isPressed()) {
@@ -46,8 +47,10 @@ void loop() {
 
   if (!pauzeTijd) {
     int lijnPositie = lijnSensor.leesPositie();
-
+    blokjesTijd = lijnSensor.zagBruin();
     if(blokjesTijd) {
+      xbee.printXbee("Bruin gezien!");
+      Motors.Stop();
       xbee.printXbee("Blokjestijd True");
       blokZoeker.rijNaarMidden();
       xbee.printXbee("Midden reached");

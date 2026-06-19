@@ -5,11 +5,8 @@
 Encoder::Encoder():wheel(3.0),cm((3.141592653 * wheel) / count),countLeft(0),countRight(0),initialized(false) {}
 
 void Encoder::init() {
-  if (!initialized){
-    extraEncoder.getCountsAndResetLeft();
-    extraEncoder.getCountsAndResetRight();
-    initialized = true;
-  }
+  extraEncoder.getCountsAndResetLeft();
+  extraEncoder.getCountsAndResetRight();
 }
 int Encoder::getCountsLeft(){
    countLeft = extraEncoder.getCountsLeft();
@@ -25,3 +22,7 @@ float Encoder::countsToCm(int counts){
     return counts * cm;
 }
 
+void Encoder::resetEncoders() {
+  extraEncoder.getCountsAndResetLeft();
+  extraEncoder.getCountsAndResetRight();
+}

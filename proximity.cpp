@@ -39,12 +39,12 @@ void ProximitySensor::printAlles() const{
 
     xbee->printLineBreak();
 
-    xbee->print("\nReading: ");
-    xbee->print("\nLeft: " + String(zumoProxSensors.countsFrontWithLeftLeds()));
-    xbee->print("\nRight: " + String(zumoProxSensors.countsFrontWithRightLeds()));
+    xbee->printXbee("\nReading: ");
+    xbee->printXbee("\nLeft: " + String(zumoProxSensors.countsFrontWithLeftLeds()));
+    xbee->printXbee("\nRight: " + String(zumoProxSensors.countsFrontWithRightLeds()));
 
-    xbee->print("\nobjectZichtbaar: ");
-    xbee->print(objectZichtbaar() ? "True" : "False");
+    xbee->printXbee("\nobjectZichtbaar: ");
+    xbee->printXbee(objectZichtbaar() ? "True" : "False");
 
     xbee->printLineBreak();
 }

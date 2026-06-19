@@ -1,11 +1,11 @@
 #include "blokZoeker.h"
 
 BlokZoeker::BlokZoeker(ProximitySensor* p, Rijden* r, LijnSensor* l, Encoder* e):proxSensors(p),motors(r),lineSensors(l),encoder(e){
-    this->blokGevonden = false;
+    //this->blokGevonden = false;
 }
 
 void BlokZoeker::setBlokGevonden(bool status){
-    this->blokGevonden = status;
+    //this->blokGevonden = status;
 }
 
 void BlokZoeker::rijNaarMidden(){
@@ -24,7 +24,7 @@ bool BlokZoeker::zoekBlok(){
     // TESTING! voor constante tracking
     // this->blokGevonden = false;
 
-
+    bool blokGevonden = false;
     // Kijk of object al zichtbaar is
     while (!blokGevonden){
         switch(proxSensors->objectRichting()){
@@ -35,7 +35,7 @@ bool BlokZoeker::zoekBlok(){
             break;
         case 0:
             // Break uit de while
-            this->blokGevonden = true;
+            blokGevonden = true;
             Serial1.println("Case 0: Blok gevonden!");
             motors->Stop();
             break;
@@ -68,5 +68,6 @@ void BlokZoeker::duwBlok(Xbee* xb){
     }
 
     Serial1.println("Lijn zichtbaar");
+    encoder->resetEncoders();
     motors->Stop();
 }

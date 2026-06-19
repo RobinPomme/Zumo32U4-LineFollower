@@ -10,6 +10,7 @@ public:
   int getCountsLeft();
   int getCountsRight();
   float countsToCm(int counts);
+  void resetEncoders();
 
 
 private:
@@ -21,6 +22,6 @@ private:
   long countLeft;
   long countRight;
   bool initialized;
-
+  
 };
 #endif
