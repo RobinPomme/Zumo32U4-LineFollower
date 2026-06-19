@@ -8,9 +8,9 @@
 #define CRUISE_SPEED 300
 #define CALIBRATE_SPEED 200
 
-#define CONSTANT_P 0.55
+#define CONSTANT_P 0.75
 #define CONSTANT_I 0
-#define CONSTANT_D 0.7 //dit zijn nu mooie waarden (Kp = 0.75, Ki = 0, Kd = 1.55 met snelheid = 300 en max in pid = max_speed) alleen beetje snel
+#define CONSTANT_D 1.1 //dit zijn nu mooie waarden (Kp = 0.75, Ki = 0, Kd = 1.55 met snelheid = 300 en max in pid = max_speed) alleen beetje snel
 
 #define BUFFER_COUNT 6
 

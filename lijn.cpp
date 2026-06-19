@@ -185,7 +185,7 @@ void LijnSensor::kalibreerWit() {
 void LijnSensor::kalibreerZwart() {
   //KalibratieData zwarteData = kalibreer("zwart");
   for (int i = 0; i < NUMSENSORS; i++) {
-    drempelwaardenZwart.minimum[i] = 250;//zwarteData.minimum[i] * 0.3;
+    drempelwaardenZwart.minimum[i] = 300;//zwarteData.minimum[i] * 0.3;
     drempelwaardenZwart.maximum[i] = 1500;//zwarteData.maximum[i] * 1.5;
     drempelwaardenZwart.gemiddelde[i] = 1000;//zwarteData.gemiddelde[i];
   }
