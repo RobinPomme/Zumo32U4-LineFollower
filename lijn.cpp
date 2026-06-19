@@ -112,9 +112,6 @@ int LijnSensor::leesPositie() {
       lijnGezien = true;
     }
   }
-    xbeePointer->printXbee(aantalZwart);
-    xbeePointer->printXbee(volgendeLinks);
-    xbeePointer->printXbee(volgendeRechts);
     if (aantalZwart == 5) {
       if (volgendeLinks) {
         return 1000;
@@ -280,16 +277,19 @@ bool LijnSensor::grijsGedetecteerd(KalibratieData meting) {
   bool grijsRechts = false;
   if (meting.gemiddelde[0] <= drempelwaardenGrijs.maximum[0] && meting.gemiddelde[0] >= drempelwaardenGrijs.minimum[0]) {
     xbeePointer->printXbee("Grijs links gezien!");
-    xbeePointer->printXbee("Sensor 0 ziet grijs " + String(meting.gemiddelde[0]) + " min: " + drempelwaardenGrijs.minimum[0] + " max: " + drempelwaardenGrijs.maximum[0]);
     grijsLinks = true;
   }
   if (meting.gemiddelde[4] <= drempelwaardenGrijs.maximum[4] && meting.gemiddelde[4] >= drempelwaardenGrijs.minimum[4]) {
     xbeePointer->printXbee("Grijs rechts gezien!");
-    xbeePointer->printXbee("Sensor 4 ziet grijs " + String(meting.gemiddelde[4]) + " min: " + drempelwaardenGrijs.minimum[4] + " max: " + drempelwaardenGrijs.maximum[4]);
     grijsRechts = true;
   }
-  volgendeLinks = grijsLinks && !grijsRechts;
-  volgendeRechts = grijsRechts && !grijsLinks;
+  if (grijsLinks && !grijsRechts) {
+    volgendeLinks = true;
+    volgendeRechts = false;
+  } else if (!grijsLinks && grijsRechts) {
+    volgendeRechts = true;
+    volgendeLinks = false;
+  }
   return grijsLinks && grijsRechts;
 }
 
