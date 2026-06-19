@@ -45,7 +45,7 @@ public:
     /**
      * @brief Stuurt de motors aan om rechtdoor te rijden totdat een zwarte lijn gezien is met \ref getZwartGezien "getZwartGezien".
      * 
-     * @param xb Een verwijzing naar een Xbee oobject. Gebruikt voor logging.
+     * @param xb Een verwijzing naar een Xbee object. Gebruikt voor logging.
      */
     void duwBlok(Xbee*);
 
