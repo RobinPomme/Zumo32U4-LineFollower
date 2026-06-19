@@ -24,7 +24,7 @@ void setup() {
   delay(1000);
   Serial.println("De kabel kan er nu uit getrokken worden.");
   xbee.printLineBreak();
-  xbee.printXbee("Om te beginnen, druk op knop b");
+  xbee.printXbee("Om te beginnen, zet de zumo op de zwarte lijn en druk op knop b");
   xbee.printLineBreak();
   knopB.waitForButton();
   Motors.initialiseer();  //initialiseert de motoren en begint daarna met het kalibreren van de lijnsensors

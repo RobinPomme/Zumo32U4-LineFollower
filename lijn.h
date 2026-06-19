@@ -40,8 +40,8 @@ private:
   bool bruinGedetecteerd(KalibratieData);
   bool grijsGedetecteerd(KalibratieData);
   bool groeneLijn;
-  bool grijsLinks;
-  bool grijsRechts;
+  bool volgendeLinks;
+  bool volgendeRechts;
   bool bruinGezien;
   int laatsteLijn;
   Zumo32U4LineSensors sensoren;
