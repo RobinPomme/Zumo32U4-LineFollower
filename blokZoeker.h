@@ -60,7 +60,6 @@ private:
     Rijden* motors;
     LijnSensor* lineSensors;
     Encoder* encoder;
-    //bool blokGevonden;
 };
 
 #endif // BLOKZOEKER_H

@@ -29,6 +29,7 @@ class Rijden {
     LijnSensor* lineSensors;
     Xbee* xbeePointer;
   public:
+  
     /**
      * @brief Construeert een nieuw Rijden object.
      * 
@@ -80,13 +81,13 @@ class Rijden {
      */
     void Achteruit();
 
-  /**
-   * @brief Berekent en voert de PID-correctie uit voor het volgen van een lijn.
-   * @details Deze functie regelt de motorsnelheden op basis van de afwijking ten opzichte van de gewenste lijnpositie.
-   * Als de lijn niet zichtbaar is, gaat er een buffersysteem in werking om de huidige koers aan te houden. Als de buffer vol is zal de zumo standaard rechtdoor gaan rijden.
-   * 
-   * @param lijnPositie De gemeten positie van de lijn. De waarde -1 laat weten dat de sensoren geen lijn hebben gedetecteerd.
-   */
+    /**
+     * @brief Berekent en voert de PID-correctie uit voor het volgen van een lijn.
+     * @details Deze functie regelt de motorsnelheden op basis van de afwijking ten opzichte van de gewenste lijnpositie.
+     * Als de lijn niet zichtbaar is, gaat er een buffersysteem in werking om de huidige koers aan te houden. Als de buffer vol is zal de zumo standaard rechtdoor gaan rijden.
+     * 
+     * @param lijnPositie De gemeten positie van de lijn. De waarde -1 laat weten dat de sensoren geen lijn hebben gedetecteerd.
+     */
     void pidController(int lijnPositie);
 
     /**

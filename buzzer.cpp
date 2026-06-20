@@ -5,22 +5,22 @@ Buzzer::Buzzer() {
     stop();
 }
 
-void Buzzer::playTone(int frequency, int duration, int volume) {
-    if (frequency < MinimumFrequency || frequency > MaximumFrequency) {
-        Serial.println("Te hoge of lage frequentie meegegeven aan 'buzzerPlayTone'. Toon wordt niet afgespeeld.");
+void Buzzer::speelToon(int frequentie, int duur, int volume) {
+    if (frequentie < MinimumFrequentie || frequentie > MaximumFrequentie) {
+        Serial.println("Te hoge of lage frequentie meegegeven aan 'buzzerspeelToon'. Toon wordt niet afgespeeld.");
         return;
     }
-    zumoBuzzer.playFrequency(frequency, duration, volume);
+    zumoBuzzer.playfrequentie(frequentie, duur, volume);
 }
 
-void Buzzer::playToneHold(int frequency, int duration, int volume) {
-    if (frequency < MinimumFrequency || frequency > MaximumFrequency) {
-        Serial.println("Te hoge of lage frequentie meegegeven aan 'buzzerPlayToneHold'. Toon wordt niet afgespeeld.");
+void Buzzer::speelToonHold(int frequentie, int duur, int volume) {
+    if (frequentie < MinimumFrequentie || frequentie > MaximumFrequentie) {
+        Serial.println("Te hoge of lage frequentie meegegeven aan 'buzzerspeelToonHold'. Toon wordt niet afgespeeld.");
         return;
     }
-    playTone(frequency, duration, volume);
+    speelToon(frequentie, duur, volume);
     // Onderstaande code zal worden uitgevoerd tot de buzzer klaar is met spelen. Is voor nu leeg.
-    while (zumoBuzzer.isPlaying()) {
+    while (zumoBuzzer.speeltAf()) {
 
     }
 }
@@ -29,6 +29,6 @@ void Buzzer::stop() {
     zumoBuzzer.stopPlaying();
 }
 
-bool Buzzer::isPlaying() {
-    return zumoBuzzer.isPlaying();
+bool Buzzer::speeltAf() {
+    return zumoBuzzer.speeltAf();
 }

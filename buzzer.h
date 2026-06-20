@@ -11,24 +11,24 @@
  */
 class Buzzer {
 public:
-    /** \brief Construeert een nieuw buzzer object. */
+    /** @brief Construeert een nieuw buzzer object. */
     Buzzer();
 
     /**
      * @brief Speelt een toon af met de gegeven frequentie, lengte en volume.
-     * @param frequency De frequentie van de toon in Hz. (Tussen 10Hz en 10kHz)
-     * @param duration De lengte van de toon in milliseconden.
+     * @param frequentie De frequentie van de toon in Hz. (Tussen 10Hz en 10kHz)
+     * @param duur De lengte van de toon in milliseconden.
      * @param volume Het volume van de toon (Van 0 t/m 15).
      */
-    void playTone(int frequency, int duration, int volume = DefaultVolume);
+    void speelToon(int frequentie, int duur, int volume = StandaardVolume);
 
     /**
      * @brief Speelt een toon af en wacht tot deze klaar is.
-     * @param frequency De frequentie van de toon in Hz. (Tussen 10Hz en 10kHz)
-     * @param duration De lengte van de toon in milliseconden.
+     * @param frequentie De frequentie van de toon in Hz. (Tussen 10Hz en 10kHz)
+     * @param duur De lengte van de toon in milliseconden.
      * @param volume Het volume van de toon (Van 0 t/m 15).
      */
-    void playToneHold(int frequency, int duration, int volume = DefaultVolume);
+    void speelToonHold(int frequentie, int duur, int volume = StandaardVolume);
 
     /** @brief Stopt het afspelen van de huidige toon. */
     void stop();
@@ -37,13 +37,13 @@ public:
      * @brief Controleert of de buzzer momenteel een toon afspeelt.
      * @return true als er een toon wordt afgespeeld, anders false.
      */
-    bool isPlaying();
+    bool speeltAf();
 
 private:
     Zumo32U4Buzzer zumoBuzzer;
-    static const int DefaultVolume = 10; // 0 - 15
-    static const int MinimumFrequency = 10; // in ms
-    static const int MaximumFrequency = 10000; // 10Hz - 10kHz
+    static const int StandaardVolume = 10; // 0 - 15
+    static const int MinimumFrequentie = 10; // in ms
+    static const int MaximumFrequentie = 10000; // 10Hz - 10kHz
 };
 
 #endif // BUZZER_H

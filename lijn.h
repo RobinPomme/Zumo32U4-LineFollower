@@ -46,7 +46,7 @@ public:
   bool zagBruin();
 
   /**
-   * @brief Roept \ref kalibreerWit "kalibreerWit", \ref kalibreerZwart "kalibreerZwart", \ref kalibreerGroen "kalibreerGroen", \ref kalibreerGrijs "kalibreerGrijs" en \ref kalibreerBruin "kalibreerBruin" aan.
+   * @brief Roept \ref kalibreerZwart "kalibreerZwart", \ref kalibreerGroen "kalibreerGroen", en \ref kalibreerBruin "kalibreerBruin" aan.
    * 
    */
   void kalibreerAlles();

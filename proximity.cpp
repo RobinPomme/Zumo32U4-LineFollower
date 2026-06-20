@@ -10,11 +10,6 @@ bool ProximitySensor::objectZichtbaar() {
     return (zumoProxSensors.countsFrontWithLeftLeds() >= objectDrempelwaarde) || (zumoProxSensors.countsFrontWithRightLeds() >= objectDrempelwaarde);
 }
 
-/*  -1 = Geen object zicthbaar
-    0 = Beide L & R gelijke waarde
-    1 = Links
-    2 = Rechts
-    Default 0 */
 int ProximitySensor::objectRichting() {
     zumoProxSensors.read();
 
@@ -49,7 +44,6 @@ void ProximitySensor::printAlles() const{
     xbee->printLineBreak();
 }
 
-/** \brief Geeft de huidige drempelwaarde objectafstandmeting. */
-void ProximitySensor::setObjectDrempelwaarde(int threshold) {
-    this->objectDrempelwaarde = threshold;
+void ProximitySensor::setObjectDrempelwaarde(int drempelwaarde) {
+    this->objectDrempelwaarde = drempelwaarde;
 }

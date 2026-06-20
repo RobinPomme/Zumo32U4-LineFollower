@@ -105,8 +105,6 @@ void Rijden::pidController(int lijnPositie) {
 
   int snelheid = (lineSensors->getLijnKleur() && inHetMidden) || isScherp ? CRUISE_SPEED / 2 : CRUISE_SPEED;
 
-  //xbeePointer->printXbee(lineSensors->getLijnKleur() ? "Groen" : "niet groen");
-
   int leftSpeed = constrain(snelheid - output, -1 * MAX_SPEED, MAX_SPEED);
   int rightSpeed = constrain(snelheid + output, -1 * MAX_SPEED, MAX_SPEED);
 

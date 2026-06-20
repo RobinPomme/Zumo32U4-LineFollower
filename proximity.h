@@ -38,9 +38,9 @@ public:
 
     /**
      * @brief Stelt de drempelwaarde voor object detectie in.
-     * @param threshold De nieuwe drempelwaarde.
+     * @param drempelwaarde De nieuwe drempelwaarde.
      */
-    void setObjectDrempelwaarde(int threshold);
+    void setObjectDrempelwaarde(int drempelwaarde);
 
     /**
      * @brief Print lezingen van zowel de linker als rechter LED, en of een object zichtbaar is.
