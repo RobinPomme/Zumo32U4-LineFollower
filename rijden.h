@@ -14,6 +14,9 @@
 
 #define BUFFER_COUNT 6
 
+/**
+ * @brief Klasse voor het aansturen van de snelheid en richting van de Zumo motoren.
+ */
 class Rijden {
   private:
     bool resetBuffer[BUFFER_COUNT];
