@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Zumo32U4 LineFollower: blokZoeker.h Bron Bestand</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Zumo32U4 LineFollower
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gegenereerd door Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Zoeken');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Laden...</div>
+<div class="SRStatus" id="Searching">Zoeken...</div>
+<div class="SRStatus" id="NoMatches">Niets gevonden</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">blokZoeker.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef BLOKZOEKER_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define BLOKZOEKER_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;Wire.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;Zumo32U4.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;proximity.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;rijden.h&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;lijn.h&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;encoder.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define ZWARTBUFFER 10</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="foldopen" id="foldopen00016" data-start="{" data-end="};">
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classBlokZoeker.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="classBlokZoeker.html">BlokZoeker</a> {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_class" href="classBlokZoeker.html">BlokZoeker</a>(<a class="code hl_class" href="classProximitySensor.html">ProximitySensor</a>*, <a class="code hl_class" href="classRijden.html">Rijden</a>*, <a class="code hl_class" href="classLijnSensor.html">LijnSensor</a>*, <a class="code hl_class" href="classEncoder.html">Encoder</a>*);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classBlokZoeker.html#ac0dd472a26599c27eb9255fd8d6a1aa2">zoekBlok</a>();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBlokZoeker.html#a69fc720fc8eb093c33b2f8584f822068">rijNaarMidden</a>();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBlokZoeker.html#a7f35740a306526b06325d5ca856ad934">duwBlok</a>(<a class="code hl_class" href="classXbee.html">Xbee</a>*);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classBlokZoeker.html#a0e449b6fe75aeb6ac2579fb3ecdc2592">setBlokGevonden</a>(<span class="keywordtype">bool</span>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="classProximitySensor.html">ProximitySensor</a>* proxSensors;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_class" href="classRijden.html">Rijden</a>* motors;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_class" href="classLijnSensor.html">LijnSensor</a>* lineSensors;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <a class="code hl_class" href="classEncoder.html">Encoder</a>* encoder;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="comment">//bool blokGevonden;</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
+</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="preprocessor">#endif </span><span class="comment">// BLOKZOEKER_H</span></div>
+<div class="ttc" id="aclassBlokZoeker_html"><div class="ttname"><a href="classBlokZoeker.html">BlokZoeker</a></div><div class="ttdoc">Klasse voor het zoeken en duwen van een blokje, of een ander object. Maakt gebruik van de proximity s...</div><div class="ttdef"><b>Definitie</b> blokZoeker.h:16</div></div>
+<div class="ttc" id="aclassBlokZoeker_html_a0e449b6fe75aeb6ac2579fb3ecdc2592"><div class="ttname"><a href="classBlokZoeker.html#a0e449b6fe75aeb6ac2579fb3ecdc2592">BlokZoeker::setBlokGevonden</a></div><div class="ttdeci">void setBlokGevonden(bool)</div><div class="ttdoc">Set status van private variabel blokGevonden.</div><div class="ttdef"><b>Definitie</b> blokZoeker.cpp:7</div></div>
+<div class="ttc" id="aclassBlokZoeker_html_a69fc720fc8eb093c33b2f8584f822068"><div class="ttname"><a href="classBlokZoeker.html#a69fc720fc8eb093c33b2f8584f822068">BlokZoeker::rijNaarMidden</a></div><div class="ttdeci">void rijNaarMidden()</div><div class="ttdoc">Stuurt de motors aan om 20cm naar voren te rijden. Meet afgelegde afstand door middel van de encoders...</div><div class="ttdef"><b>Definitie</b> blokZoeker.cpp:11</div></div>
+<div class="ttc" id="aclassBlokZoeker_html_a7f35740a306526b06325d5ca856ad934"><div class="ttname"><a href="classBlokZoeker.html#a7f35740a306526b06325d5ca856ad934">BlokZoeker::duwBlok</a></div><div class="ttdeci">void duwBlok(Xbee *)</div><div class="ttdoc">Stuurt de motors aan om rechtdoor te rijden totdat een zwarte lijn gezien is met getZwartGezien.</div><div class="ttdef"><b>Definitie</b> blokZoeker.cpp:57</div></div>
+<div class="ttc" id="aclassBlokZoeker_html_ac0dd472a26599c27eb9255fd8d6a1aa2"><div class="ttname"><a href="classBlokZoeker.html#ac0dd472a26599c27eb9255fd8d6a1aa2">BlokZoeker::zoekBlok</a></div><div class="ttdeci">bool zoekBlok()</div><div class="ttdoc">Zoekt het blokje door te draaien totdat de proximitysensoren iets detecteren. Draait standaard naar l...</div><div class="ttdef"><b>Definitie</b> blokZoeker.cpp:20</div></div>
+<div class="ttc" id="aclassEncoder_html"><div class="ttname"><a href="classEncoder.html">Encoder</a></div><div class="ttdoc">Klasse voor het uitlezen van de Zumo encoders.</div><div class="ttdef"><b>Definitie</b> encoder.h:8</div></div>
+<div class="ttc" id="aclassLijnSensor_html"><div class="ttname"><a href="classLijnSensor.html">LijnSensor</a></div><div class="ttdoc">Klasse voor het detecteren van lijnen met de 5 lijnsensoren op de Zumo.</div><div class="ttdef"><b>Definitie</b> lijn.h:22</div></div>
+<div class="ttc" id="aclassProximitySensor_html"><div class="ttname"><a href="classProximitySensor.html">ProximitySensor</a></div><div class="ttdoc">Klasse voor het beheer van de proximity sensoren op de Zumo32U4.</div><div class="ttdef"><b>Definitie</b> proximity.h:13</div></div>
+<div class="ttc" id="aclassRijden_html"><div class="ttname"><a href="classRijden.html">Rijden</a></div><div class="ttdoc">Klasse voor het aansturen van de snelheid en richting van de Zumo motoren.</div><div class="ttdef"><b>Definitie</b> rijden.h:20</div></div>
+<div class="ttc" id="aclassXbee_html"><div class="ttname"><a href="classXbee.html">Xbee</a></div><div class="ttdoc">Klasse voor communicatie met de Xbee aangesloten via seriële interface.</div><div class="ttdef"><b>Definitie</b> xbee.h:10</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gegenereerd door&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

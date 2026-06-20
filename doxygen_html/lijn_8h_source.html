@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Zumo32U4 LineFollower: lijn.h Bron Bestand</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Zumo32U4 LineFollower
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gegenereerd door Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Zoeken');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(0); });
+/* @license-end */
+</script>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Laden...</div>
+<div class="SRStatus" id="Searching">Zoeken...</div>
+<div class="SRStatus" id="NoMatches">Niets gevonden</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">lijn.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef lijnh</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define lijnh</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;Zumo32U4.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;Wire.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;xbee.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define NUMSENSORS 5  </span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="structKalibratieData.html">   13</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordtype">int</span> minimum[NUMSENSORS];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  <span class="keywordtype">int</span> maximum[NUMSENSORS];</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">int</span> gemiddelde[NUMSENSORS];</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>};</div>
+</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classLijnSensor.html">   22</a></span><span class="keyword">class </span><a class="code hl_class" href="classLijnSensor.html">LijnSensor</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <a class="code hl_class" href="classLijnSensor.html">LijnSensor</a>(<a class="code hl_class" href="classXbee.html">Xbee</a>*);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a> <a class="code hl_function" href="classLijnSensor.html#a84c9159a7ae2726d58d290371df921ae">kalibreer</a>(String kleur);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classLijnSensor.html#a9696228afbb32ea4bd84eba846caeacf">zagBruin</a>();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#a4fc9d342c65586d06e3a3732580b1b06">kalibreerAlles</a>();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#aa22ae2021c6ad7779f89dd12547e7de8">kalibreerLijn</a>();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#a9e071bb00e9dca9aaa5f3d90731ba546">kalibreerWit</a>();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#a5779a9bca17389fe1e47272d1fc2d575">kalibreerZwart</a>();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#a768fdfc308b05a1251ea511851fe1fcc">kalibreerGroen</a>();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#a8933f75a7abba75c53315eb3a92a0ec1">kalibreerGrijs</a>();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#adb28bf04c70e863fcd5995dc697b0fd8">kalibreerBruin</a>();</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="keywordtype">int</span> <a class="code hl_function" href="classLijnSensor.html#ab52e59f0d2bec17fd221455a68d10eff">leesPositie</a>();</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classLijnSensor.html#af644d692dac26d75950e42d520ccd120">getLijnKleur</a>(); <span class="comment">// TODO: Naam aanpassen.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classLijnSensor.html#aa1ed9b0c565d957e249fa57438db29e1">getZwartGezien</a>();</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordtype">void</span> resetBruin();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classLijnSensor.html#ad4f817a59742569a8d5241b60074eba4">  110</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classLijnSensor.html#ad4f817a59742569a8d5241b60074eba4">resetBruin</a>();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  <a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a> getGemiddeldeMeting(<span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keywordtype">bool</span> zwartGedetecteerd(<a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a>);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keywordtype">bool</span> groenGedetecteerd(<a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a>);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  <span class="keywordtype">bool</span> bruinGedetecteerd(<a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a>);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  <span class="keywordtype">bool</span> grijsGedetecteerd(<a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a>);</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <span class="keywordtype">bool</span> groeneLijn;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <span class="keywordtype">bool</span> volgendeLinks;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keywordtype">bool</span> volgendeRechts;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <span class="keywordtype">bool</span> bruinGezien;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  <span class="keywordtype">int</span> laatsteLijn;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  Zumo32U4LineSensors sensoren;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> waarden[NUMSENSORS];  </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a> drempelwaardenZwart;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a> drempelwaardenGroen;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a> drempelwaardenGrijs;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <a class="code hl_struct" href="structKalibratieData.html">KalibratieData</a> drempelwaardenBruin;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  <a class="code hl_class" href="classXbee.html">Xbee</a>* xbeePointer;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  Zumo32U4ButtonB knopB;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>};</div>
+</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassLijnSensor_html"><div class="ttname"><a href="classLijnSensor.html">LijnSensor</a></div><div class="ttdoc">Klasse voor het detecteren van lijnen met de 5 lijnsensoren op de Zumo.</div><div class="ttdef"><b>Definitie</b> lijn.h:22</div></div>
+<div class="ttc" id="aclassLijnSensor_html_a4fc9d342c65586d06e3a3732580b1b06"><div class="ttname"><a href="classLijnSensor.html#a4fc9d342c65586d06e3a3732580b1b06">LijnSensor::kalibreerAlles</a></div><div class="ttdeci">void kalibreerAlles()</div><div class="ttdoc">Roept kalibreerWit, kalibreerZwart, kalibreerGroen, kalibreerGrijs en kalibreerBruin aan.</div><div class="ttdef"><b>Definitie</b> lijn.cpp:223</div></div>
+<div class="ttc" id="aclassLijnSensor_html_a5779a9bca17389fe1e47272d1fc2d575"><div class="ttname"><a href="classLijnSensor.html#a5779a9bca17389fe1e47272d1fc2d575">LijnSensor::kalibreerZwart</a></div><div class="ttdeci">void kalibreerZwart()</div><div class="ttdoc">Kalibreert zwart en slaat het op in een KalibratieData struct. Stelt de drempelwaarden in met een aan...</div><div class="ttdef"><b>Definitie</b> lijn.cpp:187</div></div>
+<div class="ttc" id="aclassLijnSensor_html_a768fdfc308b05a1251ea511851fe1fcc"><div class="ttname"><a href="classLijnSensor.html#a768fdfc308b05a1251ea511851fe1fcc">LijnSensor::kalibreerGroen</a></div><div class="ttdeci">void kalibreerGroen()</div><div class="ttdoc">Kalibreert groen en slaat het op in een KalibratieData struct. Stelt de drempelwaarden in met een aan...</div><div class="ttdef"><b>Definitie</b> lijn.cpp:196</div></div>
+<div class="ttc" id="aclassLijnSensor_html_a84c9159a7ae2726d58d290371df921ae"><div class="ttname"><a href="classLijnSensor.html#a84c9159a7ae2726d58d290371df921ae">LijnSensor::kalibreer</a></div><div class="ttdeci">KalibratieData kalibreer(String kleur)</div><div class="ttdoc">Kalibreert de meegegeven kleur.</div><div class="ttdef"><b>Definitie</b> lijn.cpp:49</div></div>
+<div class="ttc" id="aclassLijnSensor_html_a8933f75a7abba75c53315eb3a92a0ec1"><div class="ttname"><a href="classLijnSensor.html#a8933f75a7abba75c53315eb3a92a0ec1">LijnSensor::kalibreerGrijs</a></div><div class="ttdeci">void kalibreerGrijs()</div><div class="ttdoc">Kalibreert grijs en slaat het op in een KalibratieData struct. Stelt de drempelwaarden in met een aan...</div><div class="ttdef"><b>Definitie</b> lijn.cpp:214</div></div>
+<div class="ttc" id="aclassLijnSensor_html_a9696228afbb32ea4bd84eba846caeacf"><div class="ttname"><a href="classLijnSensor.html#a9696228afbb32ea4bd84eba846caeacf">LijnSensor::zagBruin</a></div><div class="ttdeci">bool zagBruin()</div><div class="ttdoc">Een getter voor de variabel 'bruinGezien'.</div><div class="ttdef"><b>Definitie</b> lijn.cpp:289</div></div>
+<div class="ttc" id="aclassLijnSensor_html_a9e071bb00e9dca9aaa5f3d90731ba546"><div class="ttname"><a href="classLijnSensor.html#a9e071bb00e9dca9aaa5f3d90731ba546">LijnSensor::kalibreerWit</a></div><div class="ttdeci">void kalibreerWit()</div><div class="ttdoc">Kalibreert wit zonder daarna KalibratieData aan te passen.</div><div class="ttdef"><b>Definitie</b> lijn.cpp:182</div></div>
+<div class="ttc" id="aclassLijnSensor_html_aa1ed9b0c565d957e249fa57438db29e1"><div class="ttname"><a href="classLijnSensor.html#aa1ed9b0c565d957e249fa57438db29e1">LijnSensor::getZwartGezien</a></div><div class="ttdeci">bool getZwartGezien()</div><div class="ttdoc">Voert drie getGemiddeldeMetingen uit en geeft de waarde van zwartGedetecteerd op deze waardes terug.</div><div class="ttdef"><b>Definitie</b> lijn.cpp:12</div></div>
+<div class="ttc" id="aclassLijnSensor_html_aa22ae2021c6ad7779f89dd12547e7de8"><div class="ttname"><a href="classLijnSensor.html#aa22ae2021c6ad7779f89dd12547e7de8">LijnSensor::kalibreerLijn</a></div><div class="ttdeci">void kalibreerLijn()</div><div class="ttdoc">Kalibreert de fysieke lijnsensoren via de Zumo32U4 library. Wordt alleen via de init van klasse Rijde...</div><div class="ttdef"><b>Definitie</b> lijn.cpp:232</div></div>
+<div class="ttc" id="aclassLijnSensor_html_ab52e59f0d2bec17fd221455a68d10eff"><div class="ttname"><a href="classLijnSensor.html#ab52e59f0d2bec17fd221455a68d10eff">LijnSensor::leesPositie</a></div><div class="ttdeci">int leesPositie()</div><div class="ttdoc">Controleert op alle lijnkleuren en berekent een gewogen gemiddelde.</div><div class="ttdef"><b>Definitie</b> lijn.cpp:82</div></div>
+<div class="ttc" id="aclassLijnSensor_html_ad4f817a59742569a8d5241b60074eba4"><div class="ttname"><a href="classLijnSensor.html#ad4f817a59742569a8d5241b60074eba4">LijnSensor::resetBruin</a></div><div class="ttdeci">void resetBruin()</div><div class="ttdoc">Zet boolean variabel bruinGezien op false.</div></div>
+<div class="ttc" id="aclassLijnSensor_html_adb28bf04c70e863fcd5995dc697b0fd8"><div class="ttname"><a href="classLijnSensor.html#adb28bf04c70e863fcd5995dc697b0fd8">LijnSensor::kalibreerBruin</a></div><div class="ttdeci">void kalibreerBruin()</div><div class="ttdoc">Kalibreert brijn en slaat het op in een KalibratieData struct. Stelt de drempelwaarden in met een aan...</div><div class="ttdef"><b>Definitie</b> lijn.cpp:205</div></div>
+<div class="ttc" id="aclassLijnSensor_html_af644d692dac26d75950e42d520ccd120"><div class="ttname"><a href="classLijnSensor.html#af644d692dac26d75950e42d520ccd120">LijnSensor::getLijnKleur</a></div><div class="ttdeci">bool getLijnKleur()</div><div class="ttdoc">Een getter voor de waarde van groeneLijn.</div><div class="ttdef"><b>Definitie</b> lijn.cpp:285</div></div>
+<div class="ttc" id="aclassXbee_html"><div class="ttname"><a href="classXbee.html">Xbee</a></div><div class="ttdoc">Klasse voor communicatie met de Xbee aangesloten via seriële interface.</div><div class="ttdef"><b>Definitie</b> xbee.h:10</div></div>
+<div class="ttc" id="astructKalibratieData_html"><div class="ttname"><a href="structKalibratieData.html">KalibratieData</a></div><div class="ttdoc">Aangemaakt met kalibratie van een lijnkleur. Slaat de minimumwaarde, maximumwaarde,...</div><div class="ttdef"><b>Definitie</b> lijn.h:13</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gegenereerd door&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>
