@@ -13,7 +13,10 @@
 class ProximitySensor {
 public:
 
-    /** \brief Construeert een ProximitySensor object. */
+    /** @brief Construeert een ProximitySensor object. 
+     *  
+     *  @param Xbee Een verwijzing naar een Xbee object. Nodig voor logging.
+    */
     ProximitySensor(Xbee*);
 
     /**
