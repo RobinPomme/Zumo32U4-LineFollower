@@ -1,6 +1,6 @@
 #include "buzzer.h"
 
-void Buzzer::init() {
+Buzzer::Buzzer() {
     // Er is geen speciaal init-process voor de buzzer nodig, maar alsnog handig om ter zekerheid een stop command er heen te sturen
     stop();
 }

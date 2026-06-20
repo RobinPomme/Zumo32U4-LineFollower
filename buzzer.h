@@ -11,8 +11,8 @@
  */
 class Buzzer {
 public:
-    /** @brief Initialiseert de buzzer. */
-    void init();
+    /** \brief Construeert een nieuw buzzer object. */
+    Buzzer();
 
     /**
      * @brief Speelt een toon af met de gegeven frequentie, lengte en volume.

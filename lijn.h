@@ -102,6 +102,7 @@ public:
    * @return De boolean waarde van \ref zwartgedetecteerd "zwartGedetecteerd".
    */
   bool getZwartGezien();
+  void resetBruin();
 
   /**
    * @brief Zet boolean variabel bruinGezien op false.

@@ -10,7 +10,7 @@ Rijden::Rijden(Xbee* x, LijnSensor* l)
 }  //constructor voor de zumo die de snelheid meteen op 0 zet
 
 int Rijden::getSnelheid() const {
-  return snelheid;  //geeft de snelheid als de gebruiker erom vraagt
+  return snelheid[0];  //geeft de snelheid als de gebruiker erom vraagt
 }
 
 void Rijden::initialiseer() {
@@ -77,6 +77,11 @@ void Rijden::pidController(int lijnPositie) {
     lijnPositie = 3000;
     afgeleide = 0;
     xbeePointer->printXbee("BUFFER VOL!!!! we gaan nu rechtdoor.");
+    if (error > 0) {
+      setSnelheid(-1 * CRUISE_SPEED, CRUISE_SPEED); 
+    } else {
+      setSnelheid(CRUISE_SPEED, -1 * CRUISE_SPEED);
+    }
   } else {
     for (int i = 0; i<BUFFER_COUNT; i++) {
       resetBuffer[i] = true;
@@ -88,14 +93,19 @@ void Rijden::pidController(int lijnPositie) {
   double Yp = CONSTANT_P * error;
 
   integraal += error;
-  double Yi = integraal * CONSTANT_I;
+  double Yi = constrain(integraal, -1000, 1000) * CONSTANT_I;
 
   double Yd = (error - afgeleide) * CONSTANT_D;
   afgeleide = error;
 
   int output = Yp + Yi + Yd;
 
-  int snelheid = lineSensors->getLijnKleur() ? CRUISE_SPEED / 2 : CRUISE_SPEED;
+  bool inHetMidden = abs(error) < 600;
+  bool isScherp = abs(error) > 1200;
+
+  int snelheid = (lineSensors->getLijnKleur() && inHetMidden) || isScherp ? CRUISE_SPEED / 2 : CRUISE_SPEED;
+
+  //xbeePointer->printXbee(lineSensors->getLijnKleur() ? "Groen" : "niet groen");
 
   int leftSpeed = constrain(snelheid - output, -1 * MAX_SPEED, MAX_SPEED);
   int rightSpeed = constrain(snelheid + output, -1 * MAX_SPEED, MAX_SPEED);
