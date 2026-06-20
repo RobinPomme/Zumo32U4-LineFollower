@@ -44,6 +44,6 @@ void ProximitySensor::printAlles() const{
     xbee->printLineBreak();
 }
 
-void ProximitySensor::setObjectDrempelwaarde(int threshold) {
-    this->objectDrempelwaarde = threshold;
+void ProximitySensor::setObjectDrempelwaarde(int drempelwaarde) {
+    this->objectDrempelwaarde = drempelwaarde;
 }
