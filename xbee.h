@@ -5,8 +5,7 @@
 #include <Arduino.h>
 
 /**
- * @brief 
- * 
+ * @brief Klasse voor communicatie met de Xbee aangesloten via seriële interface.
  */
 class Xbee {
     public:

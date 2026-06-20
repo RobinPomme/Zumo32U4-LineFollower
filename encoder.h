@@ -2,6 +2,9 @@
 #define ENCODER_H
 #include "Zumo32U4.h"
 
+/**
+ * @brief Klasse voor het uitlezen van de Zumo encoders.
+ */
 class Encoder{
 public:
 
