@@ -11,7 +11,7 @@
  */
 class Buzzer {
 public:
-    /** \brief Construeert een nieuw buzzer object. */
+    /** @brief Construeert een nieuw buzzer object. */
     Buzzer();
 
     /**

@@ -10,9 +10,7 @@ Zumo32U4ButtonA knopA;
 Zumo32U4ButtonB knopB;
 Zumo32U4ButtonC knopC;
 
-// 
-Xbee xbee;
-// 
+Xbee xbee; 
 LijnSensor lijnSensor(&xbee);
 Rijden Motors(&xbee, &lijnSensor);
 ProximitySensor proximitySensor(&xbee);
