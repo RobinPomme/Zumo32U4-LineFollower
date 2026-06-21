@@ -21,7 +21,7 @@ const int minBalanceSpeed = 55;
 const int motorLimit      = 400;
 const int leftTrim        = 0;
 
-const unsigned long minApproachMs  = 1025;  // ← was 1050
+const unsigned long minApproachMs  = 1025;  ///< ← was 1050
 const unsigned long maxApproachMs  = 3000;
 
 const unsigned long settleTimeMs   = 800;
@@ -40,6 +40,10 @@ float angleDeg          = 0.0f;
 float gyroRateDegPerSec = 0.0f;
 float balanceTargetAngle = 0.0f;
 
+/**
+ * @brief Berekent de kantelhoek van de robot op basis van de accelerometer.
+ * @return De hoek in graden berekend via atan2(ax, az).
+ */
 float readAccelAngleDeg()
 {
     float ax = (float)imu.accel.x;
@@ -47,11 +51,20 @@ float readAccelAngleDeg()
     return atan2(ax, az) * 180.0f / PI;
 }
 
+/**
+ * @brief Berekent de rotatieSnelheid in graden per seconde op basis van de gyroscoop.
+ * @return De rotatieSnelheid in graden per seconde (imu.gyro.y * 0.07f).
+ */
 float readGyroRateDegPerSec()
 {
     return (float)imu.gyro.y * 0.07f;
 }
 
+/**
+ * @brief Leest sensordata uit en werkt de hoekschatting bij via een complementair filter.
+ *
+ * Wordt elke loop-cyclus aangeroepen vanuit updateAngleEstimate() in blinkdemo.ino.
+ */
 void updateAngleEstimate()
 {
     imu.update();
@@ -70,6 +83,10 @@ void updateAngleEstimate()
     angleDeg = (gyroWeight * predictedAngle) + ((1.0f - gyroWeight) * accelAngle);
 }
 
+/**
+ * @brief Stuurt beide motoren aan op de opgegeven snelheid met een minimumdrempel en motorlimiet.
+ * @param speed De gewenste motorsnelheid (negatief = achteruit).
+ */
 void setMatchedSpeeds(int speed)
 {
     if (speed != 0 && abs(speed) < minBalanceSpeed)
@@ -79,11 +96,17 @@ void setMatchedSpeeds(int speed)
     motors.setSpeeds(speed + leftTrim, speed);
 }
 
+/**
+ * @brief Stopt beide motoren door ze op snelheid 0 te zetten.
+ */
 void stopMotors()
 {
     motors.setSpeeds(0, 0);
 }
 
+/**
+ * @brief Berekent en past de motorsnelheid aan om de robot op het balancpunt te houden.
+ */
 void balanceOnPoint()
 {
     float error = angleDeg - balanceTargetAngle;
@@ -96,6 +119,11 @@ void balanceOnPoint()
     setMatchedSpeeds(speed);
 }
 
+/**
+ * @brief Stuurt sensordata en toestandsinformatie naar de seriële monitor.
+ *
+ * Wordt maximaal elke 120 ms aangeroepen om de output leesbaar te houden.
+ */
 void printDebug()
 {
     if (millis() - lastPrintTime < 120)
@@ -111,6 +139,9 @@ void printDebug()
     Serial.print(" | AccelZ: ");  Serial.println(imu.accel.z);
 }
 
+/**
+ * @brief Reset de run naar de begintoestand en stopt de motoren.
+ */
 void resetRun()
 {
     started = false;
@@ -119,6 +150,9 @@ void resetRun()
     Serial.println("Run klaar. Druk opnieuw op Button B.");
 }
 
+/**
+ * @brief Initialiseert de hardware, IMU en seriële communicatie.
+ */
 void setup()
 {
     Serial.begin(115200);
@@ -139,6 +173,9 @@ void setup()
     Serial.println("Druk op Button B om een run te starten.");
 }
 
+/**
+ * @brief Hoofdlus: werkt de hoekschatting bij en verwerkt de toestandsmachine.
+ */
 void loop()
 {
     updateAngleEstimate();
@@ -162,7 +199,7 @@ void loop()
 
     switch (state)
     {
-    // ── State 1: Rijd omhoog tot wipwap horizontaal is (= grijze lijn) ──
+    /// @brief State 1: Rijd omhoog tot wipwap horizontaal is (= grijze lijn)
     case 1:
         motors.setSpeeds(approachSpeed + leftTrim, approachSpeed);
         {
@@ -181,7 +218,7 @@ void loop()
         }
         break;
 
-    // ── State 2: Stilstaan, hoek opslaan als doelhoek ──────────────────
+    /// @brief State 2: Stilstaan, hoek opslaan als doelhoek
     case 2:
         stopMotors();
 
@@ -194,7 +231,7 @@ void loop()
         }
         break;
 
-    // ── State 3: 3 seconden balanceren op grijze lijn ──────────────────
+    /// @brief State 3: 3 seconden balanceren op grijze lijn
     case 3:
         balanceOnPoint();
 
@@ -206,7 +243,7 @@ void loop()
         }
         break;
 
-    // ── State 4: Rijd van de wipwap af ─────────────────────────────────
+    /// @brief State 4: Rijd van de wipwap af
     case 4:
         motors.setSpeeds(exitSpeed + leftTrim, exitSpeed);
 
