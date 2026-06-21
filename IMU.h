@@ -7,30 +7,39 @@
 #include "accelerometer.h"
 #include "magnetometer.h"
 
-// De IMU klasse is de hoofdklasse voor alle sensordata.
-// Hij beheert de accelerometer, gyroscoop en magnetometer.
-// Via begin() wordt de hardware opgestart en via update() worden
-// de nieuwste sensorwaarden uitgelezen en opgeslagen.
+/**
+ * @brief De IMU klasse is de hoofdklasse voor alle sensordata.
+ *
+ * Hij beheert de accelerometer, gyroscoop en magnetometer.
+ * Via begin() wordt de hardware opgestart en via update() worden
+ * de nieuwste sensorwaarden uitgelezen en opgeslagen.
+ */
 class IMU
 {
 private:
-    Zumo32U4IMU imu;  // De interne Pololu hardware driver die de fysieke sensor aanstuurt
+    Zumo32U4IMU imu;  ///< De interne Pololu hardware driver die de fysieke sensor aanstuurt
 
 public:
-    // Constructor: maakt het IMU object aan
+    /**
+     * @brief Constructor: maakt het IMU object aan
+     */
     IMU();
 
-    // begin() initialiseert de IMU hardware via I2C.
-    // Geeft true terug als de sensor gevonden en opgestart is, anders false.
+    /**
+     * @brief begin() initialiseert de IMU hardware via I2C.
+     * @return true als de sensor gevonden en opgestart is, anders false.
+     */
     bool begin();
 
-    // update() leest de nieuwste waarden uit van alle drie de sensoren
-    // en slaat ze op in accel, gyro en mag via hun set() functies.
+    /**
+     * @brief update() leest de nieuwste waarden uit van alle drie de sensoren
+     * en slaat ze op in accel, gyro en mag via hun set() functies.
+     */
     void update();
 
-    Gyro gyro;          // Gyroscoop: meet rotatieSnelheid in graden per seconde
-    Accelerometer accel; // Accelerometer: meet zwaartekracht, gebruikt voor hoekberekening
-    Magnetometer mag;   // Magnetometer: meet het magnetisch veld voor richting
+    Gyro gyro;           ///< Gyroscoop: meet rotatieSnelheid in graden per seconde
+    Accelerometer accel; ///< Accelerometer: meet zwaartekracht, gebruikt voor hoekberekening
+    Magnetometer mag;    ///< Magnetometer: meet het magnetisch veld voor richting
 };
 
 #endif
