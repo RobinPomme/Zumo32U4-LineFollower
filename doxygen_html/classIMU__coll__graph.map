@@ -1,0 +1,9 @@
+<map id="IMU" name="IMU">
+<area shape="rect" id="Node000001" title=" " alt="" coords="117,93,165,119"/>
+<area shape="rect" id="Node000002" href="$classGyro.html" title=" " alt="" coords="5,5,59,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,37,128,91,125,95,56,41"/>
+<area shape="rect" id="Node000003" href="$classAccelerometer.html" title=" " alt="" coords="83,5,200,31"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,45,144,93,139,93,139,45"/>
+<area shape="rect" id="Node000004" href="$classMagnetometer.html" title=" " alt="" coords="223,5,342,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="254,40,162,95,159,91,251,35"/>
+</map>
