@@ -1,0 +1,4 @@
+# Zumo32U4 LineFollower
+Dit project bevat code voor een Zumo32U4-robot. De code is geschreven in C++ en maakt gebruik van de ingebouwde sensoren om autonoom een specifiek parcours af te leggen volgens gestelde eisen. Naast het volgen van de lijn bevat het parcours ook een paar obstakels die onze code moet afhandelen.
+## Documentatie
+Documentatie, gegenereerd met [Doxygen](https://www.doxygen.nl/), is te vinden in de map `doxygen_html`. Je kan de inhoud van de folder openen met een webbrowser en de documentatie lezen als een webpagina door het pad naar de map in te voeren als webadres. (Bijv. `file:///home/user/Documents/LineFollower/doxygen_html/index.html`)
