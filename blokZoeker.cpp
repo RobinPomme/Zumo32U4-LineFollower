@@ -16,7 +16,7 @@ void BlokZoeker::rijNaarMidden(){
 }
 
 bool BlokZoeker::zoekBlok(){
-    proxSensors->setObjectDrempelwaarde(5);
+    proxSensors->setObjectDrempelwaarde(4);
 
     bool blokGevonden = false;
     // Kijk of object al zichtbaar is

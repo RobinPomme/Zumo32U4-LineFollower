@@ -196,8 +196,8 @@ bool LijnSensor::bruinGedetecteerd(KalibratieData meting) {
 }
 
 bool LijnSensor::grijsGedetecteerd(KalibratieData meting) {
-  grijsLinks = false;
-  grijsRechts = false;
+  bool grijsLinks = false;
+  bool grijsRechts = false;
   if (meting.gemiddelde[0] <= drempelwaardenGrijs.maximum[0] && meting.gemiddelde[0] >= drempelwaardenGrijs.minimum[0]) {
     xbeePointer->printXbee("Grijs links gezien!");
     grijsLinks = true;

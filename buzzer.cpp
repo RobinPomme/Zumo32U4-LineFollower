@@ -10,7 +10,7 @@ void Buzzer::speelToon(int frequentie, int duur, int volume) {
         Serial.println("Te hoge of lage frequentie meegegeven aan 'buzzerspeelToon'. Toon wordt niet afgespeeld.");
         return;
     }
-    zumoBuzzer.playfrequentie(frequentie, duur, volume);
+    zumoBuzzer.playFrequency(frequentie, duur, volume);
 }
 
 void Buzzer::speelToonHold(int frequentie, int duur, int volume) {
@@ -20,7 +20,7 @@ void Buzzer::speelToonHold(int frequentie, int duur, int volume) {
     }
     speelToon(frequentie, duur, volume);
     // Onderstaande code zal worden uitgevoerd tot de buzzer klaar is met spelen. Is voor nu leeg.
-    while (zumoBuzzer.speeltAf()) {
+    while (speeltAf()) {
 
     }
 }
@@ -30,5 +30,5 @@ void Buzzer::stop() {
 }
 
 bool Buzzer::speeltAf() {
-    return zumoBuzzer.speeltAf();
+    return zumoBuzzer.isPlaying();
 }

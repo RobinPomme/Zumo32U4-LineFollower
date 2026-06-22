@@ -23,6 +23,8 @@ public:
   /** @brief dit rekent de counts naar centimeter */
   float countsToCm(int counts);
 
+  void resetEncoders();
+
 
 private:
   /** @brief ZUMO encoder object voor het uitlezen van beide wielen */
